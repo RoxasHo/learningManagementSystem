@@ -1,0 +1,32 @@
+.profile-photo-label {
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.profile-photo {
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the container */
+    border: 2px solid #ddd; /* Optional: Adds a border */
+}
+
+.profile-photo-input {
+    display: none; /* Hide the file input */
+}
+
+.save-photo-button {
+    margin-top: 10px;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
