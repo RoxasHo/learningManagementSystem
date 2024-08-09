@@ -9,14 +9,18 @@ class Student extends Model {
 
     use HasFactory;
 
+    
+      protected $primaryKey = 'studentID'; // Use 'studentID' as primary key
+    public $incrementing = true; // Indicates that this is an auto-incrementing field
+    protected $keyType = 'int'; // Ensure it's set to int if using auto-increment
+    
     protected $fillable = [
         'userID',
         'name',
         'reportComment',
-        'customerContactNumber',
         'progress',
         'interests',
-        'profile_photo_url',
+        'studentPicture',
     ];
 
     public function user() {

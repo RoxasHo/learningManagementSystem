@@ -11,19 +11,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id(); // unsignedBigInteger auto-increment primary key
+            $table->id();
             $table->string('name', 50);
             $table->string('email', 100)->unique();
             $table->string('password');
             $table->string('gender')->nullable();
             $table->date('dateOfBirth')->nullable();
-            $table->string('contactNumber')->nullable(); // New field
-            $table->enum('role', ['Student', 'Teacher', 'Moderator']);
+            $table->string('contactNumber')->nullable();
+            $table->enum('role', ['Student', 'Teacher', 'Moderator','superuser']);
             $table->rememberToken();
+            $table->string('token')->nullable();
+            $table->timestamp('token_created_at')->nullable();
             $table->text('profile')->nullable();
             $table->string('feedback')->nullable();
             $table->integer('point')->nullable()->unsigned();
-            $table->timestamps(); // Automatically creates created_at and updated_at fields
+            $table->timestamp('last_login_at')->nullable();
+
+            $table->timestamps();
         });
     }
 

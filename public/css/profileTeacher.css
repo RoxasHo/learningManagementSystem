@@ -13,7 +13,7 @@ body {
 }
 
 /* Profile Container */
-.profile-container {
+.profile-container, .edit-profile-container {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
@@ -22,31 +22,29 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Profile Header */
 .profile-header {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.profile-header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.left-section, .right-section {
-    flex: 1;
-    margin: 10px;
+.teacher-info {
+    margin-left: 20px;
 }
 
 /* Profile Picture */
-.studentPicture-label {
-    display: inline-block;
-    position: relative;
+.teacherPicture-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-right: 20px;
 }
 
-.studentPicture {
+.teacherPicture {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -55,27 +53,25 @@ body {
     transition: border-color 0.3s ease;
 }
 
-.studentPicture:hover {
+.teacherPicture:hover {
     border-color: #777;
 }
 
 .edit-icon {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+    margin-top: 10px;
     background-color: #fff;
     border-radius: 50%;
     padding: 5px;
     border: 1px solid #ccc;
 }
 
-.studentPicture-input {
+.teacherPicture-input {
     display: none;
 }
 
 /* Form Button */
 .save-picture-button {
-    display: inline-block;
+    display: block;
     margin-top: 10px;
     padding: 10px 20px;
     background-color: #007bff;
@@ -106,8 +102,8 @@ p {
 
 /* Settings Button */
 .settings-button {
-    display: inline-block;
-    margin-top: 15px;
+    display: block;
+    margin-top: 30px;
     padding: 10px 20px;
     background-color: #28a745;
     color: #fff;
@@ -121,20 +117,17 @@ p {
     background-color: #218838;
 }
 
-/* Profile Content (additional details) */
+/* Profile Content */
 .profile-content {
-    display: flex;
-    justify-content: space-around;
     margin-top: 20px;
 }
 
 .profile-section {
-    flex: 1;
-    margin: 0 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 15px;
     background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .profile-section h3 {
@@ -143,4 +136,37 @@ p {
 
 .profile-section p {
     white-space: pre-wrap;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-primary {
+    background-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
 }

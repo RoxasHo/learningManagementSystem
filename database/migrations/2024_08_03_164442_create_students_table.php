@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('reportComment', 255)->nullable();
             $table->decimal('progress', 5, 2)->nullable();
             $table->string('interests')->nullable();
-             $table->string('profile_photo_url')->nullable();
+             $table->string('studentPicture')->nullable()->change;
             $table->unsignedBigInteger('userID'); // 确保与 users 表主键一致
             $table->foreign('userID')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

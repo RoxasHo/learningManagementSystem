@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller {
 
@@ -51,126 +52,121 @@ class RegisterController extends Controller {
                 // Fill in other fields if needed
         ]);
 
-        return redirect()->route('register.student.page')->with('success', 'Student registered successfully');
+        return redirect()->route('login')->with('success', 'Student registered successfully. Please log in.');
     }
 
     public function registerTeacher(Request $request) {
         $validator = Validator::make($request->all(), [
-                    'email' => 'required|email|unique:users,email',
-                    'name' => 'required|string|max:255',
-                    'contactNumber' => 'required|string|max:15',
-                    'gender' => 'required|string',
-                    'dateOfBirth' => 'required|date',
-                    'password' => 'required|confirmed|min:6',
-                    'certification' => 'required|file|mimes:pdf,doc,docx',
-                    'identityProof' => 'required|file|mimes:pdf,doc,docx',
-                    'picture' => 'required|file|image',
-                    'yearsOfExperience' => 'required|integer',
+            'email' => 'required|email|unique:users,email',
+            'name' => 'required|string|max:255',
+            'contactNumber' => 'required|string|max:15',
+            'gender' => 'required|string',
+            'dateOfBirth' => 'required|date',
+            'password' => 'required|confirmed|min:6',
+            'certification' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'identityProof' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'teacherPicture' => 'required|file|mimes:jpg,jpeg,png|max:2048',
+            'yearsOfExperience' => 'required|integer',
         ]);
-        //var_dump($request->email);
-
 
         if ($validator->fails()) {
-            //var_dump($request->email);
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        var_dump($request->email);
 
         try {
-
-            // 获取文件对象
+            // Retrieve file objects
             $certificationFile = $request->file('certification');
             $identityProofFile = $request->file('identityProof');
-            $pictureFile = $request->file('picture');
+            $teacherPictureFile = $request->file('teacherPicture');
 
-            // 创建唯一的文件名
+            // Generate unique filenames using the user's name
+            $userName = $request->input('name');
+            $userNameSlug = Str::slug($userName);
             $timestamp = time();
-            $certificationName = 'certification_' . $timestamp . '.' . $certificationFile->getClientOriginalExtension();
-            $identityProofName = 'identityProof_' . $timestamp . '.' . $identityProofFile->getClientOriginalExtension();
-            $pictureName = 'picture_' . $timestamp . '.' . $pictureFile->getClientOriginalExtension();
 
-            // 存储文件路径
-            $certificationPath = Storage::putFileAs('certifications', $certificationFile, $certificationName);
-            $identityProofPath = Storage::putFileAs('identity_proofs', $identityProofFile, $identityProofName);
-            $picturePath = Storage::putFileAs('profile_pictures', $pictureFile, $pictureName);
+            $certificationName = $userNameSlug . '_certification_' . $timestamp . '.' . $certificationFile->getClientOriginalExtension();
+            $identityProofName = $userNameSlug . '_identityProof_' . $timestamp . '.' . $identityProofFile->getClientOriginalExtension();
+            $teacherPictureName = $userNameSlug . '_teacherPicture_' . $timestamp . '.' . $teacherPictureFile->getClientOriginalExtension();
 
-            // 创建新用户
+            // Store files in public directory and get paths
+            $certificationPath = $certificationFile->storeAs('certifications', $certificationName, 'public');
+            $identityProofPath = $identityProofFile->storeAs('identity_proofs', $identityProofName, 'public');
+            $teacherPicturePath = $teacherPictureFile->storeAs('teacher_pictures', $teacherPictureName, 'public');
+
+            // Create a new user
             $user = User::create([
-                        'email' => $request->input('email'),
-                        'name' => $request->input('name'),
-                        'password' => Hash::make($request->input('password')),
-                        'gender' => $request->input('gender'),
-                        'dateOfBirth' => $request->input('dateOfBirth'),
-                        'contactNumber' => $request->input('contactNumber'),
-                        'role' => 'Teacher',
-                        'profile' => null,
-                        'feedback' => null,
-                        'point' => 0,
+                'email' => $request->input('email'),
+                'name' => $request->input('name'),
+                'password' => Hash::make($request->input('password')),
+                'gender' => $request->input('gender'),
+                'dateOfBirth' => $request->input('dateOfBirth'),
+                'contactNumber' => $request->input('contactNumber'),
+                'role' => 'Teacher',
+                'profile' => null,
+                'feedback' => null,
+                'point' => 0,
             ]);
-            // var_dump($user);
-            // 创建教师记录
+
+            // Create teacher record
             Teacher::create([
                 'userID' => $user->id,
                 'name' => $user->name,
                 'certification' => $certificationPath,
                 'identityProof' => $identityProofPath,
-                'picture' => $picturePath,
+                'teacherPicture' => $teacherPicturePath,
                 'yearsOfExperience' => $request->input('yearsOfExperience'),
             ]);
 
-            return redirect()->route('register.teacher.page')->with('success', 'Teacher registered successfully');
+            return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in.');
         } catch (\Exception $e) {
-            //  var_dump(e);
-
             Log::error('Teacher registration failed: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Failed to register teacher. Please try again.');
+            return redirect()->back()->with('error', 'Failed to register teacher. Error: ' . $e->getMessage());
         }
     }
+    
 
-    public function showModeratorRegistrationForm() {
-        return view('auth.registerModerator');
-    }
+public function registerModerator(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'email' => 'required|email|unique:users,email',
+        'name' => 'required|string|max:255',
+        'password' => 'required|confirmed|min:6',
+        'gender' => 'required|string',
+        'dateOfBirth' => 'required|date',
+        'contactNumber' => 'nullable|string|max:15',
+        'referralCode' => 'required|string',
+    ]);
 
-    public function registerModerator(Request $request) {
-        $validator = Validator::make($request->all(), [
-                    'email' => 'required|email|unique:users,email',
-                    'name' => 'required|string|max:255',
-                    'password' => 'required|confirmed|min:6',
-                    'gender' => 'required|string',
-                    'dateOfBirth' => 'required|date',
-                    'contactNumber' => 'nullable|string|max:15',
-                    'preferredCode' => 'required|string|max:255',
-        ]);
-
-        if ($validator->fails()) {
+       if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        try {
-            // Create a new user
-            $user = User::create([
-                        'email' => $request->input('email'),
-                        'name' => $request->input('name'),
-                        'password' => Hash::make($request->input('password')),
-                        'gender' => $request->input('gender'),
-                        'contactNumber' => $request->input('contactNumber'),
-                        'dateOfBirth' => $request->input('dateOfBirth'),
-                        'role' => 'Moderator',
-                        'profile' => null,
-                        'feedback' => null,
-                        'point' => 0,
-            ]);
+    try {
+        // Create a new user
+        $user = User::create([
+               'email' => $request->input('email'),
+                    'name' => $request->input('name'),
+                    'password' => Hash::make($request->input('password')),
+                    'gender' => $request->input('gender'),
+                    'dateOfBirth' => $request->input('dateOfBirth'),
+                    'contactNumber' => $request->input('contactNumber'),
 
-            // Create the moderator entry
-            Moderator::create([
-                'user_id' => $user->id,
-                'name' => $user->name,
-                'preferred_code' => $request->input('preferredCode'),
-            ]);
+            'role' => 'Moderator',
+            'profile' => null,
+            'feedback' => null,
+            'point' => 0,
+        ]);
 
-            return redirect()->route('register.moderator.page')->with('success', 'Moderator registered successfully');
-        } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'There was a problem with the database. Please try again later.');
-        }
+        // Create the moderator entry
+        Moderator::create([
+            'userID' => $user->id,
+            'name' => $user->name,
+            'referralCode' => $request->input('referralCode'),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Moderator registered successfully. Please log in.');
+    } catch (QueryException $e) {
+        return redirect()->back()->with('error', 'Failed to register moderator. Error: ' . $e->getMessage());
     }
+}
 }

@@ -1,4 +1,4 @@
-/* public/css/login.css */
+/* resources/css/login.css */
 
 body {
     font-family: Arial, sans-serif;
@@ -45,6 +45,14 @@ body {
 
 .textbox button:hover {
     background: #0056b3;
+}
+
+.textbox label {
+    font-weight: bold;
+}
+
+.textbox input[type="checkbox"] {
+    width: auto;
 }
 
 .error {

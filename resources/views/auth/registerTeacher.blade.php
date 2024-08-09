@@ -46,14 +46,15 @@
             <label for="identityProof">Identity Proof:</label>
             <input type="file" id="identityProof" name="identityProof" required>
 
-            <label for="picture">Profile Picture:</label>
-            <input type="file" id="picture" name="picture" required>
+            <label for="teacherPicture">Teacher Picture:</label>
+            <input type="file" id="teacherPicture" name="teacherPicture" required>
 
             <label for="yearsOfExperience">Years of Experience:</label>
             <input type="number" id="yearsOfExperience" name="yearsOfExperience" required>
 
             <button type="submit">Register</button>
         </form>
+        <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
     </div>
 </body>
 </html>

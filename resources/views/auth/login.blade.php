@@ -10,9 +10,27 @@
     <div class="container">
         <div class="login-box">
             <h2>Login</h2>
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
+            <!-- Alert Messages -->
+            <div class="mt-5">
+                @if($errors->any())
+                    <div class="col-12">
+                        @foreach($errors->all() as $error)
+                            <div class="alert alert-danger">{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
 
+                @if(session()->has('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                @if(session()->has('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+            </div>
+            
+            <form method="POST" action="{{ route('login.post') }}">
+                @csrf <!-- CSRF 令牌 -->
                 <div class="textbox">
                     <label for="email">Email</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -30,15 +48,21 @@
                 </div>
 
                 <div class="textbox">
+                    <label for="remember">
+                        <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                    </label>
+                </div>
+
+                <div class="textbox">
                     <button type="submit">Login</button>
                 </div>
 
-                @if (Route::has('password.request'))
-                    <a class="forgot" href="{{ route('password.request') }}">
-                        Forgot Your Password?
-                    </a>
-                @endif
+                <div>
+                    <a href="{{ route('forget.password') }}">Forget Password</a>
+                </div>
             </form>
+
+            <p>Haven't got an account? <a href="{{ route('register.options') }}">Register now</a></p>
         </div>
     </div>
 </body>

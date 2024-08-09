@@ -8,13 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Teacher extends Model
 {
     use HasFactory;
-
+    protected $primaryKey = 'teacherID'; 
+    public $incrementing = true; // Indicates that this is an auto-incrementing field
+    protected $keyType = 'int'; // Ensure it's set to int if using auto-increment
+    
     protected $fillable = [
         'userID',
         'name',
         'certification',
         'identityProof',
-        'picture',
+        'teacherPicture',
         'yearsOfExperience',
     ];
 
