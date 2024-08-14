@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/CourseManagement/app/Http/Controllers/CourseController.php</file>
-            <file>file:/C:/xampp/htdocs/CourseManagement/app/Http/Controllers/QuizzController.php</file>
-            <file>file:/C:/xampp/htdocs/CourseManagement/app/Http/Controllers/MaterialController.php</file>
-            <file>file:/C:/xampp/htdocs/CourseManagement/app/Http/Controllers/ChapterController.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/database/migrations/2024_08_14_140009_create_users_table.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/database/migrations/2024_08_14_140344_create_teachers_table.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/database/migrations/2024_08_14_140652_create_students_table.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/app/Models/User.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/app/Http/Controllers/LoginController.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/database/migrations/0001_01_01_000000_create_users_table.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/app/Models/Teacher.php</file>
+            <file>file:/C:/xampp/htdocs/CourseManagement/database/migrations/2024_08_14_140453_create_moderators_table.php</file>
         </group>
     </open-files>
 </project-private>

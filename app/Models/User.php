@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,10 +18,24 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
+        'name',
         'password',
+        'gender',
+        'dateOfBirth',
+        'contactNumber',
+        'role',
+        'profile',
+        'feedback',
+        'remember_token',
+        'token',
+        'token_created_at',
+        'point',
+        'last_login_at',
+        'registeredAt',
     ];
+
+    public $timestamps = true; // Ensure timestamps are managed by Laravel
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,16 +47,43 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+
+    /* public function student()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasOne(Student::class, 'userID');
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class, 'userID');
+    }
+        */
+
+
+    public function moderator()
+    {
+        return $this->hasOne(Moderator::class, 'userID');
+    }
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'last_login_at' => 'datetime', // 确保该属性被正确转化为 Carbon 实例
+
+    ];
+
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'userID');
+    }
+
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class, 'userID');
     }
 }
