@@ -13,8 +13,12 @@ class Chapter extends Model
         'chapter_name',
         'chapter_number',
         'chapter_description',
-       
+        'course_id'
     ];
-    
+    public static function getChapterWithCourse($courseId){
+           $chapters = Chapter::where("course_id", $courseId)->get();
+           return $chapters;
+        
+    }
    
 }

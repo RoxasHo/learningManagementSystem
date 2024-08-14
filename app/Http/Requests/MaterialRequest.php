@@ -23,7 +23,9 @@ class MaterialRequest extends FormRequest
     {
         if(request()->isMethod('post')) {
             return [
-                'content' => 'required|string|video|audio|max:2048',
+                'id' => 'required|integer|max:2048',
+                'content' => 'required|string|max:2048',
+                
                 
             ];
         } else {
