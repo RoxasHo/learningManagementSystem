@@ -48,7 +48,7 @@ class LoginController extends Controller
     }
 
     public function collectPoint()
-    {p
+    {
         return view('profile.collectPoint');
     }
 

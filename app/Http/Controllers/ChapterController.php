@@ -23,23 +23,35 @@ class ChapterController extends Controller
     }
     public function addChapter(ChapterRequest $request){
         try {
-            $Ch = Chapter::where('course_id', $request->courseId)
+            $Ch = Chapter::where('course_id', $request->course_id)
                                 ->where('chapter_number', $request->chapter_number)
                                 ->get();
-            if(!$Ch ) {return response()->json(['Chapter number and Course Id repeated','Chapter'=>$Ch],200);}
+            
+            if($Ch->isEmpty()) {
             $Ch=Chapter::create([
                 'chapter_name' => $request->chapter_name,
                 'course_id' => $request->course_id,
                 'chapter_number' => $request->chapter_number,
                 'chapter_description' => $request->chapter_description, 
             ]);
-            MaterialController::createMaterial($Ch->id);
-            QuizzController::createQuizz($Ch->id);
+            /*
+            Material::create([
+                'chapter_id'=>$Ch->id,
+                'content'=>' '
+            ]);
+            Quizz::create([
+                'chapter_id'=>$Ch->id,
+                'content'=>' '
+            ]);
+             * 
+             */
             
             
             return response()->json([
                 'message' => "Chapter successfully created."
             ],200);
+            }
+            else {return response()->json(['Chapter number and Course Id repeated','Chapter'=>$Ch],500);}
         } catch (\Exception $e) {
             // Return Json Response
             return response()->json([

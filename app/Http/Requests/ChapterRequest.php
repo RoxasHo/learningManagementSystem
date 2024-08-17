@@ -26,7 +26,7 @@ class ChapterRequest extends FormRequest
                 
                 'chapter_name' => 'required|string|',
                 'course_id' => 'required|integer',
-                'chapter_number' => 'required|string|',
+                'chapter_number' => 'required|integer|',
           
                 'chapter_description' => 'string|max:258'
             ];
