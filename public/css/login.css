@@ -1,0 +1,87 @@
+/* resources/css/login.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.textbox {
+    margin-bottom: 15px;
+}
+
+.textbox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.textbox .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.textbox .password-container input {
+    flex-grow: 1;
+    padding-right: 40px;
+}
+
+.textbox .toggle-password {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    color: #777;
+}
+
+.textbox button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: #fff;
+    font-size: 16px;
+}
+
+.textbox button:hover {
+    background: #0056b3;
+}
+
+.textbox label {
+    font-weight: bold;
+}
+
+.textbox input[type="checkbox"] {
+    width: auto;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+}
+
+.forgot {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+}
