@@ -1,0 +1,89 @@
+/* Basic styling for the tags container */
+.tags-container {
+    padding-top: 5%;  
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 8px;
+   
+}
+
+
+h3 {
+    font-size: 1.8rem;
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-bottom: 1%;
+}
+
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; 
+}
+
+
+.tag {
+    padding: 8px 16px;
+    background-color: #0096FF; 
+    color: white;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    transition: transform 0.4s ease;
+    display: inline-block;   
+}
+
+.tag:hover{
+    transform: scale(1.1);  
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+            
+  }
+
+  .search-container {
+    display: flex;
+    margin-left: 10%;
+}
+
+/* Search input styling */
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+/* Search input focus styling */
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Search button styling */
+.search-button {
+    background-color: #0096FF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+}
+
+/* Search button hover styling */
+.search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Search button active styling */
+.search-button:active {
+    background-color: #004085;
+}

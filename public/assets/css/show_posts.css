@@ -1,0 +1,232 @@
+
+.posts-container {
+    padding-top: 10%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.post {
+    margin-bottom: 20px;
+    margin-left:10%;
+    padding: 15px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.post:hover {
+    transform: scale(1.02); 
+}
+
+.post h4 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.post p {
+    font-size: 1rem;
+    color: black;
+}
+
+.posts-container h3{
+margin-left:10%;
+}
+
+
+.post img {
+    width: 300px; 
+}
+.post table, .post th, .post td {
+    border: 1px solid #000000; 
+    color: black;
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.write-comment{
+    padding-top: 1%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.ck-editor__editable_inline {
+    height: 150px;
+    color: black;
+}
+
+.write-comment h4{
+    padding-bottom: 1%;
+    margin-top: -2%;
+    font-size: 1.25rem;
+}
+
+.comment-container{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.comment-container h4{
+    padding-bottom: 1%;
+    margin-top: -1%;
+    font-size: 1.25rem;
+}
+
+.comment-item img {
+        width: 300px; 
+}
+
+a 
+{ 
+    text-decoration: none;
+    color: inherit; 
+} 
+
+
+
+
+.vote-button .post-ratings-container {
+	display: flex;
+	justify-content: center;
+	padding: 12px 0;
+   
+}
+
+.vote-button .post-rating {
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+
+.vote-button .post-rating:not(:last-child) {
+	margin-right: 25px;
+}
+
+.vote-button .post-rating-selected > .post-rating-button,
+.vote-button .post-rating-selected > .post-rating-count {
+	color: #0096FF;
+}
+
+.vote-button .post-rating-button {
+	margin-right: 6px;
+	cursor: pointer;
+	
+}
+
+.vote-button .post-rating:not(.post-rating-selected) > .post-rating-button:hover {
+	color: #0096FF;
+}
+
+.material-symbols-outlined:hover{
+    color: #0096FF;
+}
+
+.report-modal {
+    padding-left: 34%;
+    padding-top: 10%;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Background blur */
+}
+
+.report-modal-content {
+    background: #1f242d;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.report-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.report-modal .close:hover,
+.report-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.report-modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-modal label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.report-modal textarea {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.report-modal input[type="hidden"] {
+    display: none;
+}
+
+/* Radio button styling */
+.report-modal .radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-modal .radio-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.report-modal .radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Submit button styling */
+.report-modal button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.report-modal button:hover {
+    background-color: #0056b3;
+}
+
+.report-modal .checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-button{
+    justify-content: end;
+}
+

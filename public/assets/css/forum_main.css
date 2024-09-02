@@ -1,0 +1,257 @@
+body {
+    color: black;
+    
+    
+}
+
+.whole-container{
+    display: flex;
+    
+}
+
+.forum-header h2{
+    color:#FFFFFF;
+    
+}
+
+.forum-header{
+    padding-top: 4%;
+    padding-left: 10%;
+}
+
+        .forum {
+            padding-top: 1%;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+      
+       
+        .post {
+            margin-bottom: 20px;
+            margin-left:13%;
+            padding: 15px;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+        }
+        .post:hover {
+            transform: scale(1.02); /* Slightly scale up the post */
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .post-content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .post-content img {
+            width: 300px; 
+        }
+        .post-content table, .post-content th, .post-content td {
+            border: 1px solid #000000; 
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .post-actions div {
+            display: flex;
+            align-items: center;
+        }
+        .post-actions img {
+            margin-right: 5px;
+        }
+        .tags {
+            margin-right: 10%;
+            margin-top: 13%;
+            flex: 1;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 440px;
+            flex-basis: 200px;  
+            flex-grow: 0;  
+            flex-shrink: 0;  
+            
+        }
+        .tags h3 {
+            margin-top: 0;
+        }
+        .tag {
+            display: block;
+            padding: 5px 0;
+            border-bottom: 1px solid #000000;
+        }
+        .view-more {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .view-more a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .view-more a:hover {
+        text-decoration: underline;
+        }
+
+        .add-button {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            position: fixed; 
+            right: 15%;   
+            bottom: 6%;  
+            z-index: 1000;   
+        }
+
+        .add-button img {
+            width: auto;
+            height: auto; 
+            transition: opacity 0.3s ease;
+        }
+
+        .add-button a:hover img {
+            opacity: 0.8; 
+           
+        }
+     
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+          }
+      
+        
+.vote-button .post-ratings-container {
+	display: flex;
+	justify-content: center;
+	padding: 12px 0;
+   
+}
+
+.vote-button .post-rating {
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+
+.vote-button .post-rating:not(:last-child) {
+	margin-right: 10px;
+}
+
+.vote-button .post-rating-selected > .post-rating-button,
+.vote-button .post-rating-selected > .post-rating-count {
+	color: #0096FF;
+}
+
+.vote-button .post-rating-button {
+	margin-right: 6px;
+	cursor: pointer;
+	
+}
+
+.vote-button .post-rating:not(.post-rating-selected) > .post-rating-button:hover {
+	color: #0096FF;
+}
+
+.material-symbols-outlined:hover{
+    color: #0096FF;
+}
+
+       
+.search-container {
+    display: flex;
+    margin-left: 12%;
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+/* Search input styling */
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+/* Search input focus styling */
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Search button styling */
+.search-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Search button hover styling */
+.search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Search button active styling */
+.search-button:active {
+    background-color: #004085;
+}
+       
+
+h4{
+    color: white;
+    margin-left: 13%;
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+
+
+
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    padding-left: 10%;
+
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
