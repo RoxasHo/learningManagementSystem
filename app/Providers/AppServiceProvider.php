@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+        require_once base_path('app/Helpers/DateHelper.php');
         
     }
 }

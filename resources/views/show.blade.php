@@ -36,6 +36,9 @@
         @foreach($posts as $post)
         <div class="post">
             <a href="{{ route('post.show', $post->post_id) }}" class="post-title">{{ $post->title }}</a>
+            <div class="post-date">
+            {{ \App\Helpers\DateHelper::formatDate($post->created_at) }}
+        </div>
             <div class="post-content">{!! $post->content !!}</div><br>
             <div class="post-actions">
                 <div class="post-tag">#{{ $post->tag }}</div>
@@ -69,12 +72,15 @@
     </div>
     </div>
 
-    <div class="tab-panel" id="tab2" style="display: none;">
-            <!-- Content for the Following tab (currently empty) -->
+    <div class="tab-panel" id="tab2" >
+    <div class="no-followed-topics-container">
+        <p>No followed topics</p>
+    </div>
             
         </div>
     </div>
 
+    
     <div class="tags" style="margin-top: 1%;">
         <h3>Hot Topics</h3>
         @foreach($tagsArray as $tag)
@@ -84,13 +90,15 @@
             <a href="{{ route('showtags') }}">View All</a>
         </div> 
     </div>
+ 
 </div>
 
-<div class="add-button">
+<div class="add-button-container">
     <a href="{{ route('create.page') }}">
-        <img src="{{ asset('add_button.png') }}" alt="Add Post" />   
+        <button class="add-button">Add Post</button>
     </a>
-</div>
+    </div>
+
 
 
 <script>

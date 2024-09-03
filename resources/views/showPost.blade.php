@@ -14,6 +14,9 @@
     <div class="posts-container">
         <div class="post">
         <h4>{{ $post->title }}</h4>
+        <div class="post-date" style="font-size: 15px; color: black;">
+            {{ \App\Helpers\DateHelper::formatDate($post->created_at) }}
+        </div>
         <p>{!! $post->content !!}</p><br>
         <p>#{{ $post->tag }}</p>
         </div>

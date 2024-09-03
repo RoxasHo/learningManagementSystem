@@ -6,8 +6,10 @@ body {
 
 .whole-container{
     display: flex;
-    
+    position: relative; 
 }
+
+
 
 .forum-header h2{
     color:#FFFFFF;
@@ -79,49 +81,66 @@ body {
             flex-basis: 200px;  
             flex-grow: 0;  
             flex-shrink: 0;  
-            
         }
+        
         .tags h3 {
             margin-top: 0;
         }
+        
         .tag {
             display: block;
             padding: 5px 0;
             border-bottom: 1px solid #000000;
         }
+        
         .view-more {
             text-align: right;
             margin-top: 10px;
         }
+        
         .view-more a {
             color: #000000;
             text-decoration: none;
         }
-
+        
         .view-more a:hover {
-        text-decoration: underline;
+            text-decoration: underline;
         }
-
+        
+        .add-button-container {
+            position: absolute; /* Position the button container absolutely */
+            bottom: -5%; 
+            right: 10%; /* Adjust this value to move the button left or right */
+            padding: 20px;
+            background-color: #f8f9fa; /* Light grey background */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            width: 200px; /* Optional: limit container width */
+        }
+        
         .add-button {
-            display: inline-block;
-            transition: transform 0.3s ease;
-            position: fixed; 
-            right: 15%;   
-            bottom: 6%;  
-            z-index: 1000;   
+            
+            
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff; /* Primary blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-
-        .add-button img {
-            width: auto;
-            height: auto; 
-            transition: opacity 0.3s ease;
+        
+        .add-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05);
         }
-
-        .add-button a:hover img {
-            opacity: 0.8; 
-           
+        
+        .add-button:active {
+            background-color: #004085; /* Even darker blue on active */
         }
-     
+        
         
         a {
             text-decoration: none;
@@ -254,4 +273,21 @@ h4{
 
 .tab-panel.active {
     display: block;
+}
+
+
+.post-date{
+    font-size: 15px;
+}
+
+.no-followed-topics-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 200px; /* Set a fixed height */
+    background-color: #f8f9fa; /* Light grey background */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    color: #666; /* Grey text color */
+    font-size: 18px; /* Adjust font size */
 }

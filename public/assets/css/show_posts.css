@@ -16,9 +16,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
-.post:hover {
-    transform: scale(1.02); 
-}
+
 
 .post h4 {
     margin-top: 0;
@@ -29,6 +27,8 @@
 .post p {
     font-size: 1rem;
     color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .posts-container h3{
