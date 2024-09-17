@@ -1,0 +1,382 @@
+body {
+    color: black;
+    
+    
+}
+
+.whole-container{
+    display: flex;
+    position: relative; 
+}
+
+
+
+.forum-header h2{
+    color:#FFFFFF;
+    
+}
+
+.forum-header{
+    padding-top: 4%;
+    padding-left: 10%;
+}
+
+        .forum {
+            padding-top: 1%;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+      
+       
+        .post {
+            margin-bottom: 20px;
+            margin-left:13%;
+            padding: 15px;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+        }
+        .post:hover {
+            transform: scale(1.02); /* Slightly scale up the post */
+        }
+        .post-title {
+            font-size: 18px;
+            font-weight: bold;
+           
+        }
+        .post-content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .post-content img {
+            width: 300px; 
+        }
+        .post-content table, .post-content th, .post-content td {
+            border: 1px solid #000000; 
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .post-actions div {
+            display: flex;
+            align-items: center;
+        }
+        .post-actions img {
+            margin-right: 5px;
+        }
+        .tags {
+            margin-right: 10%;
+            margin-top: 13%;
+            flex: 1;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 440px;
+            flex-basis: 200px;  
+            flex-grow: 0;  
+            flex-shrink: 0;  
+            
+        }
+        
+        .tags h3 {
+            margin-top: 0;
+        }
+        
+        .tag {
+            display: block;
+            padding: 5px 0;
+            border-bottom: 1px solid #000000;
+        }
+        
+        .view-more {
+            text-align: right;
+            margin-top: 10px;
+        }
+        
+        .view-more a {
+            color: #000000;
+            text-decoration: none;
+        }
+        
+        .view-more a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-container{
+            margin-right: 100px;
+        }
+        
+        .add-button-container {
+            margin-top: 15px; 
+            margin-bottom: 30px; 
+           /* position: relative; */
+            bottom: -5%; 
+            right: 10%;  
+            padding: 15px;
+            background-color: #f8f9fa; /* Light grey background */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            width: 200px; /* Optional: limit container width */
+        }
+        
+        .add-button {
+            
+           
+            width: 100%;
+            padding: 8px;
+            background-color: #007bff; /* Primary blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .mypost-button {            
+           margin-top: 5px;
+            width: 100%;
+            padding: 8px;
+            background-color: #007bff; /* Primary blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .add-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05);
+        }
+        
+        .add-button:active {
+            background-color: #004085; /* Even darker blue on active */
+        }
+        
+        .mypost-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05);
+        }
+        
+        .mypost-button:active {
+            background-color: #004085; /* Even darker blue on active */
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+          }
+      
+        
+
+
+          .vote-button-container .post-rating:not(:last-child) {
+            margin-right: 10px;
+        }
+
+
+
+.post-rating-button {
+    margin-top: 5px;
+    color: black !important;
+   
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.post-rating-button:hover {
+    color: #0096FF !important;
+    
+}
+
+.post-rating-count {
+    font-size: 19px; /* Adjust size as needed */
+    margin-left: 5px; /* Space between button and count */ 
+}
+
+
+.post-rating, .comment-rating {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+   
+}
+
+.post-comment-icon{
+    font-size: 19px; 
+    margin-top: 9px;
+    
+}
+
+
+.material-symbols-outlined:hover {
+    color: #0096FF;
+}
+       
+.search-container {
+    display: flex;
+    margin-left: 12%;
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+/* Search input styling */
+.search-input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+/* Search input focus styling */
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+/* Search button styling */
+.search-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Search button hover styling */
+.search-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Search button active styling */
+.search-button:active {
+    background-color: #004085;
+}
+       
+
+h4{
+    color: white;
+    margin-left: 13%;
+    margin-bottom: 2%;
+    margin-top: 1%;
+}
+
+
+
+
+.tabs-header {
+    display: flex;
+    justify-content: center;
+    padding-left: 10%;
+
+    width: 70%;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #666;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+
+
+
+
+.no-followed-topics-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 200px; /* Set a fixed height */
+    background-color: none; /* Light grey background */
+    
+   
+    color: white; /* Grey text color */
+    font-size: 18px; /* Adjust font size */
+}
+
+
+
+.post-date-role {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #666; /* Lighter text color for the date */
+}
+
+
+.bullet {
+    margin: 0 4px;
+    color: #666; /* Match the color with the date */
+}
+
+.post-role {
+    color: #666; /* Dark text color for contrast */
+}
+
+.post-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Dark text color for contrast */
+}
+
+
+.post-rating-button.likedPost {
+    color: #0096FF !important;
+}
+
+.post-rating-button.dislikedPost {
+    color: #0096FF !important;
+}

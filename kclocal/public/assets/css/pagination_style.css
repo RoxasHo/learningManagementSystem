@@ -1,0 +1,73 @@
+/* General pagination container styles */
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style for previous and next links */
+.pagination-prev-next {
+    flex: 0 0 auto;
+    display: flex;
+    padding-left: 13%;
+    padding-right: 7%;
+}
+
+.pagination-prev-next a,
+.pagination-prev-next span {
+    color: #007bff;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.pagination-prev-next .disabled span {
+    color: #6c757d;
+    background-color: #e9ecef;
+}
+
+/* Style for page numbers */
+.pagination-pages {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.pagination-pages li {
+    margin: 0 5px;
+}
+
+.pagination-pages a,
+.pagination-pages span {
+    color: #007bff;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.pagination-pages .active span {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination-pages .disabled span {
+    color: #6c757d;
+    background-color: #e9ecef;
+}
+
+/* Style for the "Showing results..." text */
+.pagination-info {
+    margin-top: 5px;
+    color: white;
+    text-align: center;
+    margin-left: 3%;
+}

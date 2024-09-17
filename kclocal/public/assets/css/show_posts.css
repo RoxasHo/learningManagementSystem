@@ -1,0 +1,438 @@
+
+.posts-container {
+    padding-top: 10%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.post {
+    margin-bottom: 20px;
+    margin-left:10%;
+    padding: 15px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.post h4 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.post p {
+    font-size: 1rem;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.posts-container h3{
+margin-left:10%;
+}
+
+
+.post img {
+    width: 300px; 
+}
+.post table, .post th, .post td {
+    border: 1px solid #000000; 
+    color: black;
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.divider-post{
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+    width: 100%;
+    
+}
+
+.write-comment{
+    padding-top: 1%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.ck-editor__editable_inline {
+    height: 150px;
+    color: black;
+}
+
+.write-comment h4{
+    padding-top: 1%;
+    margin-top: -4%;
+    font-size: 1.25rem;
+}
+
+.comment-container{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.comment-container h4{
+   margin-top: 1%;
+    
+    font-size: 1.25rem;
+}
+
+.comment-item img {
+        width: 300px; 
+}
+
+a 
+{ 
+    text-decoration: none;
+    color: inherit; 
+} 
+
+.vote-button .post-rating-button.likedPost {
+    color: #0096FF;
+}
+
+.vote-button .post-rating-button.dislikedPost {
+    color: #0096FF;
+}
+
+.vote-button .post-rating-button:hover {
+    color: #0096FF ;
+}
+
+
+
+.vote-button .post-ratings-container {
+	display: flex;
+	justify-content: center;
+	padding: 12px 0;
+   
+}
+
+.vote-button .post-rating {
+	display: flex;
+	align-items: center;
+	cursor: default;
+}
+
+.vote-button .post-rating-button {
+	margin-right: 6px;
+	cursor: pointer;
+	color: white ;
+}
+
+.post-rating-count{
+    color: white;
+    font-size: 19px;  
+    margin-right: 10px;
+}
+
+.material-symbols-outlined{
+    margin-left: 10px;
+    
+}
+
+.report-modal {
+    padding-left: 34%;
+    padding-top: 10%;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Background blur */
+}
+
+.report-modal-content {
+    background: #1f242d;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.report-modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.report-modal .close:hover,
+.report-modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.report-modal form {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-modal label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+.report-modal textarea {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.report-modal input[type="hidden"] {
+    display: none;
+}
+
+/* Radio button styling */
+.report-modal .radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.report-modal .radio-group label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.report-modal .radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* Submit button styling */
+.report-modal button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.report-modal button:hover {
+    background-color: #0056b3;
+}
+
+.report-modal .checkbox-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-button{
+    justify-content: end;
+}
+
+
+
+.post-date-role {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #666; /* Lighter text color for the date */
+}
+
+
+.bullet {
+    margin: 0 4px;
+    color: #666; /* Match the color with the date */
+}
+
+.post-role {
+    color: #666; /* Dark text color for contrast */
+}
+
+.post-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.post-author-info .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333; /* Dark text color for contrast */
+}
+
+
+
+
+
+/* General styles for the comment section */
+
+
+/* Comment items */
+
+/* Profile image in comments */
+.profile-image {
+    width: 50px; 
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-right: 10px;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+/* Comment author information */
+.comment-author-info {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    
+}
+
+.author-details {
+    margin-left: 10px;
+    font-size: 15px;
+    
+}
+
+/* Comment date and role styling */
+.comment-date-role {
+   
+    font-size: 12px;
+}
+
+
+
+/* Write comment section */
+.write-comment {
+    margin-top: 30px;
+}
+
+.write-comment h4 {
+    margin-bottom: 10px;
+}
+
+.write-comment form textarea {
+    height: 100px;
+}
+
+.write-comment form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.write-comment form button:hover {
+    background-color: #0056b3;
+}
+
+/* Comment list */
+.comments-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+
+.comment-item small {
+    display: flex;
+    margin-top: 5px;
+    color: white;
+    justify-content: end;
+}
+
+/* Reply button */
+.reply-button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    
+    display: flex;
+}
+
+.material-symbols-outlined:hover {
+    color: #007bff;
+}
+
+.material-symbols-outlined{
+    padding-right:8px;
+}
+
+.reply-button:hover{
+     color: #007bff;
+}
+
+.comments-list p {
+    padding-top:8px;
+}
+
+.comment-ratings-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+
+
+.comment-ratings-container .vote-button {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.comment-ratings-container .comment-rating-button {
+    margin-right: 5px;
+    color: white;
+}
+
+.comment-ratings-container .comment-rating-count {
+    margin-right: 10px;
+    color: white;
+}
+
+.comment-ratings-container .reply-button {
+    display: flex;
+    align-items: center;
+}
+
+.comment-rating-button.liked {
+    color: #0096FF;
+}
+
+.comment-rating-button.disliked {
+    color: #0096FF;
+}
+
+.comment-rating-button:hover {
+    color: #0096FF;
+}

@@ -1,0 +1,185 @@
+body{
+    text-decoration-line: none !important;
+    text-decoration:none !important;
+}
+
+.posts-container {
+    padding-top: 10%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.post {
+    position: relative;
+    margin-bottom: 20px;
+    margin-left:10%;
+    padding: 15px;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post:hover {
+    transform: scale(1.02); /* Slightly scale up the post */
+}
+.post-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration-line: none;
+    color: black !important;
+}
+.post-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: black;   
+    text-decoration: none !important;
+}
+.post-content img {
+    width: 300px; 
+}
+.post-tag{
+    color: black;   
+}
+.post-content table, .post-content th, .post-content td {
+    border: 1px solid #000000; 
+}
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post-actions div {
+    display: flex;
+    align-items: center;
+}
+.post-actions img {
+    margin-right: 5px;
+}
+
+.post-rating-button {
+    margin-top: 5px;
+    color: black !important;
+   
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.post-rating-button:hover {
+    color: #0096FF !important;
+    
+}
+
+.post-rating-count {
+    font-size: 19px; /* Adjust size as needed */
+    margin-left: 5px; /* Space between button and count */ 
+}
+
+
+.post-rating, .comment-rating {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+   
+}
+
+.post-comment-icon{
+    font-size: 19px; 
+    margin-top: 9px;
+    
+}
+
+.material-symbols-outlined{
+    color: black !important;
+}
+.material-symbols-outlined:hover {
+    color: #0096FF !important;
+}
+
+.post-date-role {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #666; 
+    text-decoration-line: none;
+}
+
+
+.bullet {
+    margin: 0 4px;
+    color: #666; /* Match the color with the date */
+}
+
+.post-role {
+    color: #666; /* Dark text color for contrast */
+    
+}
+
+.post-author-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    text-decoration-line: none !important;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.post-author {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-decoration-line: none !important;
+}
+
+
+.post-rating-button.likedPost {
+    color: #0096FF !important;
+}
+
+.post-rating-button.dislikedPost {
+    color: #0096FF !important;
+}
+
+.posts-container h3, h1{
+    padding-left: 10%;
+    padding-bottom: 1%;
+}
+
+.post-header {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    padding-right: 3%;
+   
+}
+
+
+.delete-icon {
+    color: red; /* You can change this to any color you prefer */
+    font-size: 24px; /* Adjust size as needed */
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+}
+
+p{
+    padding-left: 10%;
+}
+

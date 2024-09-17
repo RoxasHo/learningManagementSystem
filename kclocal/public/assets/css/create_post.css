@@ -1,0 +1,25 @@
+.create-post{
+    padding-top: 10%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+#title-style{
+    width: 100%;
+    height: 25px;
+}
+
+#tag-style{
+    width: 30%;
+    height: 25px;
+}
+
+.ck-editor__editable_inline {
+    height: 300px;
+    color: black;
+}
+
+.create-button-style{
+    padding-left: 90.95%;
+}
+
