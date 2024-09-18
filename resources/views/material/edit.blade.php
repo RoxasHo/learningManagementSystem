@@ -45,7 +45,7 @@
         <textarea id="editor" name="content">
             {{ $material->content }}
         </textarea>
-
+        <input type="hidden" value="{{$material->updated_at}}" name="last_update_time">
         <!-- Submit button -->
         <div>
             <input type="submit" value="Save Content"/>

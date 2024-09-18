@@ -125,10 +125,38 @@ class CourseController extends Controller
         $chapters = DB::select('select * from chapters where course_id=? order by chapter_number ',[$course_id]);
         $materials = DB::select('select M.id as material_id,M.chapter_id,M.content  from materials M,chapters C where M.chapter_id=C.id and C.course_id=?',[$course_id]);
         $quizzs  =   DB::select('select Q.id as quizz_id,Q.content,Q.chapter_id,Qs.question_number,Qs.statement,Qs.type from quizz Q,chapters C ,questions Qs where Q.chapter_id=C.id and Qs.quizz_id=Q.id and C.course_id=?',[$course_id]);
-        
+        dump($quizzs);
+        // Assuming $quizzes is the array fetched from the database
+        $groupedQuizzes = [];
+        $quizz_id = $quizzs[0]->quizz_id;
+        // Group quizzes by question_number
+        foreach ($quizzs as $quiz) {
+            $questionNumber = $quiz->question_number;
+            if (!isset($groupedQuizzes[$questionNumber])) {
+                $groupedQuizzes[$questionNumber] = [
+                    'questions' => [],
+                    'options' => [],
+                    'answers' => []
+                ];
+            }
+
+            if ($quiz->type === 'Question') {
+                $groupedQuizzes[$questionNumber]['questions'][] = $quiz;
+            } elseif ($quiz->type === 'Option') {
+                $groupedQuizzes[$questionNumber]['options'][] = $quiz;
+            } elseif ($quiz->type === 'Answer') {
+                $groupedQuizzes[$questionNumber]['answers'][] = $quiz;
+            }
+        }
+
+
+
+
+        dump($groupedQuizzes);
+
         if($chapter_id=='null')
         $chapter_id = $chapters[0]->id;
-        return view('course/edit',['chapters'=>$chapters,'materials'=>$materials,'quizzs'=>$quizzs,'course_id'=>$course_id,'chapter_id'=>$chapter_id,'selectedType'=>$selectedType,'content_id'=>'']);
+        return view('course/edit',['chapters'=>$chapters,'materials'=>$materials,'quizzs'=>$groupedQuizzes,'course_id'=>$course_id,'chapter_id'=>$chapter_id,'selectedType'=>$selectedType,'content_id'=>'','quizz_id'=>$quizz_id]);
         //return view('course/edit',['chapter'=>$chapters,'course_id'=>$course_id]);
     }
     
@@ -181,9 +209,35 @@ class CourseController extends Controller
         $materials = DB::select('select M.id as material_id,M.chapter_id,M.content  from materials M,chapters C where M.chapter_id=C.id and C.course_id=?',[$course_id]);
         $quizzs  =   DB::select('select * from quizz Q,chapters C ,questions Qs where Q.chapter_id=C.id and Qs.quizz_id=Q.id and C.course_id=?',[$course_id]);
         $prog = DB::select('select * from progresses P where P.student_id=? and P.chapter_id=?',[$student_id,$chapter_id]);
+        $groupedQuizzes = [];
+        $quizz_id = $quizzs[0]->quizz_id;
+        // Group quizzes by question_number
+        foreach ($quizzs as $quiz) {
+            $questionNumber = $quiz->question_number;
+            if (!isset($groupedQuizzes[$questionNumber])) {
+                $groupedQuizzes[$questionNumber] = [
+                    'questions' => [],
+                    'options' => [],
+                    'answers' => []
+                ];
+            }
+
+            if ($quiz->type === 'Question') {
+                $groupedQuizzes[$questionNumber]['questions'][] = $quiz;
+            } elseif ($quiz->type === 'Option') {
+                $groupedQuizzes[$questionNumber]['options'][] = $quiz;
+            } elseif ($quiz->type === 'Answer') {
+                $groupedQuizzes[$questionNumber]['answers'][] = $quiz;
+            }
+        }
+
+
+
+        
+        
         if($chapter_id=='null')
         $chapter_id = $chapters[0]->id;
-        return view('course/student',['chapters'=>$chapters,'materials'=>$materials,'quizzs'=>$quizzs,'course_id'=>$course_id,'chapter_id'=>$chapter_id,'student_id'=>$student_id,'selectedType'=>$selectedType,'content_id'=>'','prog'=>$prog]);
+        return view('course/student',['chapters'=>$chapters,'materials'=>$materials,'quizzs'=>$groupedQuizzes,'course_id'=>$course_id,'chapter_id'=>$chapter_id,'student_id'=>$student_id,'selectedType'=>$selectedType,'content_id'=>'','prog'=>$prog,'quizz_id'=>$quizz_id]);
         //return view('course/edit',['chapter'=>$chapters,'course_id'=>$course_id]);
     }
     public function changeContent($id,$type){

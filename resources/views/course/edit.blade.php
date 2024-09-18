@@ -8,7 +8,40 @@
         <link rel="stylesheet" href="{{ asset('assets/css/EditPage.css')}}">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         @livewireStyles
-        
+        <style>
+        .question-group {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .question-group h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .question, .option, .answer {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #fff;
+        }
+
+        .question {
+            background-color: #e7f0ff;
+        }
+
+        .option {
+            background-color: #f1f8e9;
+        }
+
+        .answer {
+            background-color: #ffe7e7;
+        }
+    </style>
     </head>
     <body class="App">
     <header class="header">  
@@ -132,19 +165,40 @@
                         @endforeach
                         
                     @endif
-                    @if($selectedType=='Quizz')
-                        @foreach ($quizzs as $row)
-                        @if($row->chapter_id == $chapter_id)
-                          {!! $row->question_number !!}
-                          {!! $row->statement !!}
-                          
-                        
-                        
-                        <a href="{{url('edit-quizz',['id'=>$row->quizz_id])}}">Edit It</a>
-                        @endif    
-                        @endforeach
-                        
-                    @endif
+                    @if($selectedType == 'Quizz')
+                            
+                    @foreach ($quizzs as $question_number => $items)
+    <div class="question-group">
+        <h3>Question #{{ $question_number }}</h3>
+        
+        <!-- Display questions -->
+        @foreach ($items['questions'] as $question)
+            <div class="question">
+                <p><strong>{{ $question->statement }}</strong></p>
+            </div>
+        @endforeach
+
+        <!-- Display options -->
+        @foreach ($items['options'] as $option)
+            <div class="option">
+                <p>{{ $option->statement }}</p>
+            </div>
+        @endforeach
+
+        <!-- Display answers -->
+        @foreach ($items['answers'] as $answer)
+            <div class="answer">
+                <p>{{ $answer->statement }}</p>
+            </div>
+        @endforeach
+        
+    </div>
+@endforeach           
+
+
+                    <a href="{{url('edit-quizz',['quizz_id'=>$quizz_id]  ) }}">Edit it</a>
+                        @endif
+
                 </div>
             </div>
   </div>
@@ -186,8 +240,6 @@
 
 
 </script>
-        </div>
-        <footer class="footer">Footer</footer>
-    </div> 
+        
     </body>
 </html>

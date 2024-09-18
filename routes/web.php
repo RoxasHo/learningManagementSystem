@@ -42,6 +42,7 @@ Route::post('save-material',[MaterialController::class,'saveMaterial'])->name('s
 
 //Quizz related path
 Route::get('edit-quizz/{id}',[QuizzController::class,'quizzIndex']);
+Route::post('submit-quizz',[QuizzController::class,'quizzValidate'])->name('submit-quizz');
 /*
 Route::post('add-option-form',[QuizzController::class,'quizzIndex']);
 Route::post('add-answer-form',[QuizzController::class,'quizzIndex']);
@@ -53,6 +54,7 @@ Route::post('update-question',[QuestionController::class,'updateQuestion'])->nam
 Route::post('add-option',[QuestionController::class,'addOption'])->name('add-option');
 Route::post('add-answer', [QuestionController::class, 'addAnswer'])->name('add-answer');
 Route::delete('delete-question',[QuestionController::class, 'deleteQuestion']);
+
 // Routes for handling quiz-related AJAX requests
 /*
 Route::post('/add-question', [QuizzController::class, 'addQuestion'])->name('add-question');

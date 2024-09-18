@@ -9,6 +9,53 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
         @livewireStyles
+        <style>
+            .question-group {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .question-group h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e7f0ff;
+        }
+
+        .option {
+            margin-left: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f8e9;
+        }
+
+        .answer {
+            margin-left: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffe7e7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-check {
+            margin-bottom: 10px;
+        }
+        </style>
+        
     </head>
     <body class="App">
     <header class="header">  
@@ -108,26 +155,42 @@
                         
                     @endif
                     @if($selectedType=='Quizz')
-                        @foreach ($quizzs as $row)
-                        @if($row->chapter_id == $chapter_id)
-                          {{$row->content}}
-                          {{$content_id = $row->quizz_id}}
-                        
-                        <table> 
-                          
-                          <tr><td><h3>Question {{$row->question_number}}</h3> {{$row->statement}}</td></tr>
-                          <tr><td>Option 1 {{$row->option1}}</td></tr>
-                          <tr><td>Option 2 {{$row->option2}}</td></tr>
-                          <tr><td>Option 3 {{$row->option3}}</td></tr>
-                          <tr><td>Option 4 {{$row->option4}}</td></tr>
-                          <tr><td>Option 5 {{$row->option5}}</td></tr>
-                          <tr><td>Option 6 {{$row->option6}}</td></tr>  
-                          <tr><td>answer {{$row->answer}}</td></tr>
-                        </table>
-                        @endif    
-                        @endforeach
-                        
+                    <form action="{{ route('submit-quizz') }}" method="POST">
+            @csrf
+            <input type="hidden" name="quizz_id" value="{{$quizz_id}}">
+            <input type="hidden" name="student_id" value="1">
+            @foreach ($quizzs as $questionNumber => $items)
+                <div class="question-group">
+                    <h5>Question #{{ $questionNumber }}</h5>
+                    
+                    <!-- Display questions -->
+                    @foreach ($items['questions'] as $question)
+                        <div class="question">
+                            <p><strong>{{ $question->statement }}</strong></p>
+                        </div>
+                    @endforeach
+                    @foreach (array_merge($items['options'], $items['answers']) as $choice)
+                        <div class="form-check">
+                            <input type="checkbox" name="answers[{{ $questionNumber }}][]" id="choice-{{ $choice->quizz_id }}" value="{{ $choice->statement }}" class="form-check-input">
+                            <label class="form-check-label" for="choice-{{ $choice->quizz_id }}">
+                                {{ $choice->statement }}
+                            </label>
+                        </div>
+                    @endforeach
+                    
+                    
+                </div>
+            @endforeach
+
+            <button type="submit" class="btn btn-primary">Submit Answers</button>
+        </form>
                     @endif
+                    <script>
+        @if (session('quizResult'))
+            // Use JavaScript alert to show the result
+            alert('{{ session('quizResult') }}');
+        @endif
+    </script>
                 </div>
             </div>
   </div>
@@ -165,12 +228,11 @@
         contentDiv.style.display = 'block';
     }
     
+    
 
 
 
 </script>
-        </div>
-        <footer class="footer">Footer</footer>
-    </div> 
+         
     </body>
 </html>

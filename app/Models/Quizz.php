@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Quizz extends Model
 {
     use HasFactory;
-    protected $table="quizzs";
+    protected $table="quizz";
     protected $fillable=[
-        'content'
+        'content',
+        'chapter_id'
     ];
     
    

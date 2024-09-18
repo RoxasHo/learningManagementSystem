@@ -15,6 +15,7 @@
                 }
             });
         </script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <style>
         .question-card {
             margin-bottom: 20px;
@@ -120,6 +121,7 @@
                           <input type="hidden" id="question_id" name="question_id" value="{{$questions[0]->question_id}}">
                           <input type="hidden" id="question_number" name="question_number" value="{{$questionNumber}}">
                         <input type="text" class="form-control d-none" id="question-{{$mainQuestion->question_id}}-input" name="statement" value="{{ $mainQuestion->statement }}">
+                        
                         <h6 id="question-{{$mainQuestion->question_id}}" class="d-inline" name="statement">{{ $mainQuestion->statement }}</h6>
                         <!-- Edit, Save, Cancel Buttons -->
                         <div class="edit-buttons mt-2">
@@ -127,8 +129,8 @@
                           
                             
                         
-                            <button class="btn btn-sm btn-success d-none" id="save-question-{{$mainQuestion->question_id}}" >Save</button>
-                        
+                            <button class="btn btn-sm btn-success d-none" id="save-question-{{$mainQuestion->question_id}}" onclick="saveChanges('question-{{$mainQuestion->question_id}}')">Save</button>
+                            
                             <button class="btn btn-sm btn-secondary d-none" id="cancel-question-{{$mainQuestion->question_id}}" onclick="cancelEdit('question-{{$mainQuestion->question_id}}')">Cancel</button>
                             
                             <button class="btn btn-sm btn-danger" onclick="deleteItem('question-{{$mainQuestion->question_id}}', 'question')">Delete</button>
@@ -136,7 +138,7 @@
                             
                             
                         </div>
-                       
+                    </form>
                         <!-- Form to Add Option -->
                         <div class="add-option-form" id="add-option-form-{{$mainQuestion->question_id}}">
                             
@@ -186,7 +188,7 @@
                                     <div class="edit-buttons ms-3">
                                         <button class="btn btn-sm btn-primary" onclick="toggleEdit('option-{{$question->question_id}}')">Edit</button>
                                         
-                                        <button class="btn btn-sm btn-success d-none" id="save-option-{{$question->question_id}}" onclick="saveChanges('option-{{$question->question_id}}')">Save</>
+                                        <button class="btn btn-sm btn-success d-none" id="save-option-{{$question->question_id}}" onclick="saveChanges('option-{{$question->question_id}}')">Save</button>
                                         
                                         
                                         
@@ -221,34 +223,55 @@
     }
 
     function saveChanges(elementId) {
-        const inputElement = document.getElementById(elementId + '-input');
-        const spanElement = document.getElementById(elementId);
-        spanElement.textContent = inputElement.value;
-        toggleEdit(elementId);
-        
-        // Here you can send an AJAX request to update the data in the database
-    }
+    // Get the edited input element and the span element
+    const inputElement = document.getElementById(elementId + '-input');
+    const spanElement = document.getElementById(elementId);
+
+    // Update the span element's content with the new input value
+    spanElement.textContent = inputElement.value;
+
+    // Log the values for debugging
+    console.log(elementId + ' inputElement: ' + inputElement + ' spanElement: ' + spanElement.innerText);
+
+    // Prepare the data to send in the POST request
+    const updatedStatement = spanElement.innerText;
+
+    // Extract the questionId by splitting the elementId by the dash
+    const questionId = elementId.split('-')[1]; // Extract the part after 'option-'
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // Send a POST request to update the question
+    fetch('/update-question', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Sending JSON data
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            question_id: questionId,
+            statement: updatedStatement
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Handle success response (e.g., display a success message)
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle error response (e.g., display an error message)
+    });
+
+    // Switch out of edit mode
+    toggleEdit(elementId);
+}
+
 
     function cancelEdit(elementId) {
         toggleEdit(elementId);
     }
 
     function deleteQuestion(id) {
-        if (confirm('Are you sure you want to delete this item?')) {
-                $.ajax({
-                    url: '/delete-question/' + id, // Route to delete the item
-                    type: 'DELETE', // HTTP DELETE method
-                    success: function(response) {
-                        // If successful, show a success message and remove the item row from the table
-                        alert(response.success);
-                        //$('#item-row-' + id).remove(); // Remove the deleted item's row from the DOM
-                    },
-                    error: function(xhr) {
-                        // If there is an error, display an alert
-                        alert('Error deleting item!');
-                    }
-                });
-            }
+        
 
         // Here you can send an AJAX request to delete the data in the database
         document.getElementById(elementId).parentElement.remove();

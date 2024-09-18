@@ -20,13 +20,23 @@ class QuestionController extends Controller
     }
     
     public function updateQuestion(Request $request){
+        //dump($request);
         $question = Question::find($request->question_id);
         if($question){
-            $question->quizz_id = $request->quizz_id;
-            $question->statement=$request->statement;
-            $question->type=$request->type;
-            $question->question_number=$request->question_number;
+            $question->statement=$request->statement; 
+            $question->save();    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Question updated successfully!',
+            ]);
         }
+        else{
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Question updated failed!',
+            ]);
+        }
+        
     }
     /*
     public function validateAnswer($quizz_id,$answer,$question_number){
