@@ -21,8 +21,8 @@
         <input type="text" id="tag-style" name="tag" placeholder="e.g. (java, php)" required>
 
         <div class="create-button-style">
-            <button onclick="window.location='{{ route('show.main') }}'" type="button">Cancel</button>
-            <input type="submit" value="Publish">
+            <button class="cancel-button" onclick="window.location='{{ route('show.main') }}'" type="button">Cancel</button>
+            <input class="publish-button" type="submit" value="Publish">
         </div>
     </form>
 </div>

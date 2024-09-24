@@ -58,7 +58,7 @@
                     <span class="post-rating-count" data-type="dislike" data-post-id="{{ $post->post_id }}">{{ $post->dislikes()->forPost()->count() }}</span>
                 </button>
             </form>
-            <span class="material-symbols-outlined" id="openReportModal">report</span>
+            <span class="material-symbols-outlined" id="openReportModal" data-post-id="{{ $post->post_id }}">report</span>
         </div>
     </div>
 </div>
@@ -91,8 +91,8 @@
             </div>
             <label for="customContent">Other:</label>
             <textarea id="customContent" name="customContent" rows="4" cols="50"></textarea>
-            <input type="hidden" id="postId" name="postId" value="">
-            <!-- Removed commentId -->
+            <input type="hidden" id="postId" name="postId" value="{{ $post->post_id }}">
+            <input type="hidden" id="commentId" name="commentId" value="">
             <button type="submit">Submit Report</button>
         </form>
     </div>
@@ -114,21 +114,25 @@
         </div>
         </div>
 
-   
+        @php
+    $visibleComments = $post->comments->where('is_visible', true)->whereNull('parent_comment_id');
+@endphp
 
     <div class="comment-container">
-    <h4>All Comments ({{ $post->comments->whereNull('parent_comment_id')->count() }})</h4>
+    <h4>All Comments ({{ $post->comments->whereNull('parent_comment_id')->where('is_visible', true)->count() }})</h4>
 
-    @if($post->comments->isEmpty())
+    @if($visibleComments->isEmpty())
         <p>No comments yet.</p>
     @else
         <ul class="comments-list">
-        @foreach($post->comments->whereNull('parent_comment_id') as $comment)
+        @foreach($post->comments->whereNull('parent_comment_id')->where('is_visible', true) as $comment)
 <div class="divider-post"></div>
 <li class="comment-item">
+<input type="hidden" class="comment-id" value="{{ $comment->comment_id }}">
     <!-- Comment author details -->
     <div class="comment-author-info">
     <img src="{{ $comment->user->student->studentPicture ? asset('storage/' . $comment->user->student->studentPicture) : asset('images/default-profile.png') }}" alt="{{ $comment->user->name }}'s profile image" class="profile-image">
+    <div class="author-and-delete">
         <div class="author-details">
             <div class="comment-author"><strong>{{ $comment->user->name }}</strong></div>
             <div class="comment-date-role">
@@ -142,9 +146,41 @@
                 </span>
             </div>
         </div>
+
+       
+    <div class="comment-actions">
+        <span class="material-symbols-outlined more-button">
+            more_vert
+        </span>
+
+        <!-- Hidden action menu with delete and report icons -->
+        <div class="action-menu">
+        @if(auth()->check() && auth()->user()->id == $comment->userID)
+            <form action="{{ route('comment.destroy', $comment->comment_id) }}"   method="POST" class="delete-form">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button" style="background: none; border: none; cursor: pointer;">
+                    <span class="material-symbols-outlined delete-icon">delete</span>
+                </button>
+            </form>
+        @endif
+        @if(auth()->check() && auth()->user()->id != $comment->userID)
+            <span class="material-symbols-outlined report-icon" id="openReportModal" id="openReportModal" data-post-id="{{ $post->post_id }}">report</span>
+        @endif
+        </div>
     </div>
 
+
+
+    </div>
+</div>
+              
+
     <p>{!! $comment->content !!}</p>
+
+
+
+
 
     <!-- Vote Forms for Comments -->
     <div class="comment-ratings-container" data-comment-id="{{ $comment->comment_id }}">
@@ -194,21 +230,46 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-document.getElementById("openReportModal").addEventListener("click", function() {
-    document.getElementById("reportModal").style.display = "block";
-    // Set the postId field with the current post's ID
-    document.getElementById("postId").value = '{{ $post->post_id }}'; 
+// Attach click event to all more-button elements
+document.querySelectorAll('.more-button').forEach(function(button) {
+    button.addEventListener('click', function() {
+        // Find the corresponding action menu within the same comment
+        const actionMenu = this.parentElement.querySelector('.action-menu');
+        
+        // Toggle the action menu display
+        actionMenu.classList.toggle('show-menu');
+    });
 });
 
-document.getElementById("closeReportModal").addEventListener("click", function() {
-    document.getElementById("reportModal").style.display = "none";
+// Optional: Hide the action menu when clicking outside
+document.addEventListener('click', function(event) {
+    document.querySelectorAll('.action-menu').forEach(function(actionMenu) {
+        const moreButton = actionMenu.parentElement.querySelector('.more-button');
+        
+        // Close the menu if clicked outside
+        if (!actionMenu.contains(event.target) && !moreButton.contains(event.target)) {
+            actionMenu.classList.remove('show-menu');
+        }
+    });
 });
 
-window.addEventListener("click", function(event) {
-    if (event.target == document.getElementById("reportModal")) {
-        document.getElementById("reportModal").style.display = "none";
-    }
+
+document.querySelectorAll('#openReportModal').forEach(button => {
+    button.addEventListener('click', function() {
+        const postId = this.getAttribute('data-post-id');
+        const commentId = this.closest('.comment-item') ? this.closest('.comment-item').querySelector('.comment-id').value : null;
+
+        document.getElementById('postId').value = postId;
+        document.getElementById('commentId').value = commentId || ''; // Set commentId if available
+
+        document.getElementById('reportModal').style.display = 'block';
+    });
 });
+
+document.getElementById('closeReportModal').addEventListener('click', function() {
+    document.getElementById('reportModal').style.display = 'none';
+});
+
 
 
 
@@ -362,7 +423,6 @@ $(document).ready(function() {
         });
     });
 });
-
 
 
 

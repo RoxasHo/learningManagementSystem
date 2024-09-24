@@ -68,5 +68,6 @@
 @endforeach
 {{ $followedPosts->links('vendor.pagination.bootstrap-5') }}
 @else
-    <p>No posts available for the tags you follow.</p>
+    <p style="color:white;  display: flex;
+    justify-content: center;">No posts available for the tags you follow.</p>
 @endif

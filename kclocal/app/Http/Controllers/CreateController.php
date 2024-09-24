@@ -53,9 +53,12 @@ class CreateController extends Controller
     public function show()
     {
         $user = auth()->user(); // Get the authenticated user
-        $posts = Post::with('likes', 'dislikes')->get();
+        $posts = Post::with('likes', 'dislikes')
+        ->where('is_deleted', false)
+        ->get();
 
         $tagsArray = Post::select('tag')
+                        ->where('is_deleted', false)
                          ->get()
                          ->pluck('tag')
                          ->flatMap(function ($tagString) {
@@ -68,7 +71,9 @@ class CreateController extends Controller
                          ->keys()
                          ->toArray();
     
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+        $posts = Post::orderBy('created_at', 'desc')
+        ->where('is_deleted', false)
+        ->paginate(5);
     
         return view("show", compact('posts', 'tagsArray', 'user'));
     }
@@ -95,6 +100,7 @@ class CreateController extends Controller
         $tag = $request->query('tag', '');
         
         $posts = Post::whereRaw("FIND_IN_SET(?, tag)", [$tag])
+        ->where('is_deleted', false)
             ->orderBy('created_at', 'desc')
             ->paginate(5)
             ->appends(['tag' => $tag]); // Append the tag parameter
@@ -138,11 +144,13 @@ class CreateController extends Controller
     
     // If no search term is provided, fetch all posts
     if (empty($search)) {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5)
+        ->where('is_deleted', false);
     } else {
         // Search for posts where the title, content, or tag matches the search term
         $posts = Post::where(function($query) use ($search) {
             $query->where('title', 'like', "%{$search}%")
+                ->where('is_deleted', false)
                   ->orWhere('content', 'like', "%{$search}%")
                   ->orWhere('tag', 'like', "%{$search}%");
         })
@@ -169,13 +177,18 @@ class CreateController extends Controller
 
 public function showPost($post_id)
 {
-   
-
     $student = Auth::user()->student;
     $user = auth()->user(); // Get the authenticated user
-    $posts = Post::with('likes', 'dislikes')->get();
+    $posts = Post::with('likes', 'dislikes')
+    ->where('is_deleted', false)
+    ->get();
     $post = Post::findOrFail($post_id); 
-    return view('showPost', compact('post', 'user', 'student'));
+
+    $comment = Comment::where('post_id', $post_id)
+    ->where('is_visible', true) 
+    ->get();
+
+    return view('showPost', compact('post', 'user', 'student', 'comment'));
 }
 
 public function storeComment(Request $request, $post_id)
@@ -261,7 +274,9 @@ public function follow(Request $request)
             }
     
             // Fetch posts that match the followed tags
-            $followedPosts = Post::whereIn('tag', $followedTags)->paginate(10);
+            $followedPosts = Post::whereIn('tag', $followedTags)
+            ->where('is_deleted', false)
+            ->paginate(10);
     
             // Return only the partial view with the followed posts
             return view('partials.following-posts', compact('followedPosts'));
@@ -279,6 +294,7 @@ public function follow(Request $request)
 {
     $user = Auth::user(); // Get the logged-in user
     $posts = Post::where('userID', $user->id) // Get only posts by the current user
+                 ->where('is_deleted', false)
                  ->orderBy('created_at', 'desc') // Order posts by creation date (newest first)
                  ->paginate(5); 
 
@@ -288,25 +304,42 @@ public function follow(Request $request)
 // PostController.php
 public function destroy($post_id)
 {
-    // Find the post by its ID and delete it
+    // Find the post by its ID
     $post = Post::findOrFail($post_id);
-    
-    // Ensure that only the owner can delete the post (optional)
-    if (Auth::user()->id !== $post->userID) {
-        return redirect()->back()->with('error', 'You are not authorized to delete this post.');
-    }
 
-    // Delete the post from the database
-    $post->delete();
+    // Mark the post as deleted by setting the is_deleted flag to true
+    $post->is_deleted = true;
+    $post->save();
 
     // Redirect back with success message
     return redirect()->route('view.mypost')->with('success', 'Post deleted successfully.');
 }
 
 
-    
+public function destroyComment($comment_id)
+{
+    $comment = Comment::findOrFail($comment_id);
 
-    
+    // Mark the comment as invisible
+    $comment->is_visible = false; 
+    $comment->save();
+
+    return redirect()->back()->with('success', 'Comment deleted successfully.');
+}
+
+public function destroyReply($comment_id)
+{
+    $reply = Comment::findOrFail($comment_id);
+
+    if ($reply->parent_comment_id !== null) {
+        // Mark the reply as invisible
+        $reply->is_visible = false; 
+        $reply->save();
+    }
+
+    return redirect()->back()->with('success', 'Reply deleted successfully.');
+}
+
     
 
 

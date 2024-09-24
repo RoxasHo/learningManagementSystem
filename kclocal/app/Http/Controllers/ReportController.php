@@ -15,6 +15,7 @@ class ReportController extends Controller
         'reportType.*' => 'string', // Validate each report type as a string if provided
         'customContent' => 'nullable|string',
         'postId' => 'required|exists:posts,post_id', // Ensure postId exists in the posts table
+        'commentId' => 'nullable|exists:comments,comment_id', // Validate commentId if provided
     ]);
 
     // Check if 'reportType' exists and combine it, or set it to null
@@ -27,6 +28,7 @@ class ReportController extends Controller
         'report_type' => $combinedReportTypes, // Store combined report types or null
         'custom_content' => $validatedData['customContent'],
         'post_id' => $validatedData['postId'],
+        'comment_id' => $validatedData['commentId'], // Set commentId if provided
         'userID' => $request->user()->id,
     ]);
 

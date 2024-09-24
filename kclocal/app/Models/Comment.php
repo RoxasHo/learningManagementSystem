@@ -16,6 +16,7 @@ class Comment extends Model
         'post_id',      
         'parent_comment_id', 
         'userID',
+        'is_visible',
     ];
 
     public function post()

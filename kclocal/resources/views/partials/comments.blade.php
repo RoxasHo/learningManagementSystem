@@ -1,11 +1,13 @@
 @if($comments->isNotEmpty())
     <ul class="comments-list">
-        @foreach($comments as $reply)
+        @foreach($comments->where('is_visible', true) as $reply)
         <div class="reply-indent" style="margin-left: 20px;">
             <li class="comment-item">
                 <!-- Comment author details -->
                 <div class="comment-author-info">
                 <img src="{{ $reply->user->student->studentPicture ? asset('storage/' . $reply->user->student->studentPicture) : asset('images/default-profile.png') }}" alt="{{ $reply->user->name }}'s profile image" class="profile-image">
+
+                <div class="author-and-delete">
                     <div class="author-details">
                         <div class="comment-author">
                             <strong>{{ $reply->user->name }}</strong> replied to <strong>{{ $comment->user->name }}</strong>
@@ -21,9 +23,36 @@
                             </span>
                         </div>
                     </div>
+
+                        
+    <div class="comment-actions">
+        <span class="material-symbols-outlined more-button">
+            more_vert
+        </span>
+
+        <!-- Hidden action menu with delete and report icons -->
+        <div class="action-menu">
+        @if(auth()->check() && auth()->user()->id == $reply->userID)
+            <form action="{{ route('comment.destroy', $comment->comment_id) }}"   method="POST" class="delete-form">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button" style="background: none; border: none; cursor: pointer;">
+                    <span class="material-symbols-outlined delete-icon">delete</span>
+                </button>
+            </form>
+        @endif
+        @if(auth()->check() && auth()->user()->id != $reply->userID)
+            <span class="material-symbols-outlined report-icon" id="openReportModal">report</span>
+        @endif
+        </div>
+    </div>
+
+                </div>
                 </div>
 
                 <p>{!! $reply->content !!}</p>
+
+      
 
                 <!-- Vote Forms for Comments -->
                 <div class="comment-ratings-container" data-comment-id="{{ $reply->comment_id }}">

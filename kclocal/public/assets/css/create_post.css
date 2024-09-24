@@ -20,6 +20,42 @@
 }
 
 .create-button-style{
-    padding-left: 90.95%;
+    justify-content: flex-end;
+    display: flex;
+    gap: 10px;
 }
 
+button.cancel-button:hover,
+input.publish-button:hover {
+    background-color: #d4d4d4;
+    transform: scale(1.05);
+}
+
+button.cancel-button {
+    color: red;
+}
+
+input.publish-button {
+    background-color: #0096FF;
+    color: white;
+    border: none;
+}
+
+input.publish-button:hover {
+    background-color: #0056b3;
+}
+
+button.cancel-button:hover {
+    background-color: #A9A9A9;
+}
+
+button.cancel-button,
+input.publish-button {
+    width: 10%;
+    
+    padding: 3px 3px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}

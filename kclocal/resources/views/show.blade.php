@@ -34,6 +34,10 @@
   
     <div class="tabs-content">
     <div class="tab-panel active" id="tab1">
+    @if($posts->isEmpty())
+        <p style="color:white;  display: flex;
+    justify-content: center;">No posts are posted yet.</p> 
+    @else
         @foreach($posts as $post)
         <div class="post">
 
@@ -84,7 +88,9 @@
                     
 
                     
-
+                    @php
+    $visibleComments = $post->comments->where('is_visible', true)->whereNull('parent_comment_id');
+@endphp
 
 
                         <a href="{{ route('post.show', $post->post_id) }}" class="post-title" style="font-weight: normal; ">
@@ -92,7 +98,7 @@
                             <span class="material-symbols-outlined">
                                 chat  
                             </span>
-                            <span class="post-comment-icon">&nbsp{{ $post->comments->whereNull('parent_comment_id')->count() }} </span>
+                            <span class="post-comment-icon">&nbsp{{ $visibleComments->count() }} </span>
                         </div>
                         </a>
                     </div>
@@ -102,6 +108,7 @@
         </div>
         @endforeach
         {{ $posts->links('vendor.pagination.bootstrap-5') }}
+        @endif
     </div>
     </div>
 

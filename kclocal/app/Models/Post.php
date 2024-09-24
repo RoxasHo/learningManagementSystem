@@ -16,7 +16,7 @@ class Post extends Model
         'content',
         'tag',
         'userID',
-    
+        'is_deleted',
     ];
 
     public function comments()

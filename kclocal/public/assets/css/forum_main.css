@@ -46,8 +46,10 @@ body {
         }
         .post-title {
             font-size: 18px;
-            font-weight: bold;
-           
+            font-weight: bold;  
+        }
+        .post-title:hover {
+            color: #007bff;
         }
         .post-content {
             margin-top: 10px;

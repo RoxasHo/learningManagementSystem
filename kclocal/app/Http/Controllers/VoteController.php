@@ -105,4 +105,5 @@ class VoteController extends Controller
       return response()->json(['likesCount' => $likesCount, 'dislikesCount' => $dislikesCount, 'userVote' => $userVote]);
   }
 
+
 }

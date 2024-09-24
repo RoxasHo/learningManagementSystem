@@ -88,6 +88,7 @@ margin-left:10%;
 
 .comment-item img {
         width: 300px; 
+
 }
 
 a 
@@ -311,7 +312,7 @@ a
     display: flex;
     align-items: center;
     font-size: 15px;
-    
+    position: relative;
 }
 
 .author-details {
@@ -366,6 +367,7 @@ a
 .comment-item small {
     display: flex;
     margin-top: 5px;
+    margin-bottom: 5px;
     color: white;
     justify-content: end;
 }
@@ -435,4 +437,70 @@ a
 
 .comment-rating-button:hover {
     color: #0096FF;
+}
+
+.material-symbols-outlined.delete-icon {
+    color: white; /* You can adjust the color if needed */
+   
+}
+
+.material-symbols-outlined.delete-icon:hover {
+    color: #0096FF; /* Change color on hover */
+}
+
+.delete-icon {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 20px;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.author-and-delete {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Take up full width to push the delete icon to the right */
+}
+
+
+
+
+
+.comment-actions {
+    position: relative;
+    display: inline-block;
+}
+
+.more-button {
+    cursor: pointer;
+}
+
+.action-menu {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 20px; /* Adjust position relative to the more button */
+    right: 0;
+    background-color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.action-menu span {
+    display: block;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+.show-menu {
+    display: block; /* Toggle to display the menu */
 }

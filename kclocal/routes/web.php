@@ -147,3 +147,7 @@ Route::get('/my-posts', [CreateController::class, 'viewMyPosts'])->name('view.my
 // web.php
 Route::delete('/post/{post}', [CreateController::class, 'destroy'])->name('post.destroy');
 
+Route::delete('/comments/{id}', [CreateController::class, 'destroyComment'])->name('comment.destroy');
+
+Route::delete('/replies/{id}', [CreateController::class, 'destroyReply'])->name('reply.destroy');
+
