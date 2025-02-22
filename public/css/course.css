@@ -1,0 +1,241 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #f9f9f9;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px; /* Space between header and course list */
+    padding: 60px 120px 10px 100px;
+    gap: 20px;
+}
+
+.header-wrapper h1{
+    font-size: 3vw;
+}
+
+.search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1; 
+    padding: 5px 15px;
+    border-radius: 25px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.search-input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    background-color: transparent; /* Matches the background */
+}
+
+.search-button {
+    border: none;
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+}
+
+.filter-search-sort-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 80px;
+    margin-top: 10px;
+}
+
+.filter-container select,
+.sort-container select {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    background-color: #f1f1f1;
+    font-size: 16px;
+    max-width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-container select:hover,
+.sort-container select:hover {
+    background-color: #e0e0e0;
+}
+
+.filter-sort-form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Courses */
+.course-container-wrapper {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.course-container {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(50px);
+    opacity: 0;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.course-container.visible{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.course-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.course-container-wrapper a {
+    text-decoration: none;
+    outline: none;
+}
+
+.course-container-wrapper:focus a {
+    text-decoration: none;
+    outline: none;
+}
+
+.course-container-header {
+    height: 100px;
+    background-color: #38b6ff;
+}
+
+.course-header-image {
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100px;
+    filter: invert(100%);
+}
+
+.course-container-content {
+    flex-grow: 1; 
+    padding: 20px 20px 10px 20px; 
+}
+
+.course-container-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111;
+}
+
+.course-container-content p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 12px; /* Adjust size as needed */
+    color: #FFD700; /* Gold color for the stars */
+}
+
+.star-rating .fa-star,
+.star-rating .fa-star-half-alt {
+    margin-right: 4px;
+}
+
+.course-container hr {
+    margin-top: auto;
+    width: 90%;
+    box-shadow: 1px 3px 12px 1px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.course-container-footer {
+    margin-top: auto;
+    padding: 10px 30px 20px;
+}
+
+.course-container-footer p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 2px;
+}
+
+.enrolled-status {
+    font-weight: bold;
+    color:#007bff;
+}
+
+.teacher-info {
+    display: flex;
+    align-items: center; /* Center the items vertically */
+}
+
+.teacher-image {
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Same as width for circular shape */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between image and text */
+    object-fit: cover; /* Ensures the image covers the circle */
+}

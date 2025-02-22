@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class Moderator extends Model
 {
@@ -14,24 +15,13 @@ class Moderator extends Model
     public $incrementing = true; // Indicates that this is an auto-incrementing field
     protected $keyType = 'int';
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($moderator) {
-            $moderator->approval_token = Str::random(40); // Generate a unique token
-        });
-    }
     protected $fillable = [
         'name',
         'blacklistUser',
         'reportsHandled',
-        'approval_token',
         'certification',
         'identityProof',
         'moderatorPicture',
-        'status',
-        'rejection_reason',
         'userID',
     ];
 
@@ -39,4 +29,19 @@ class Moderator extends Model
     {
         return $this->belongsTo(User::class, 'userID');
     }
+
+    public function getCertificationAttribute($value)
+{
+    return Storage::url($value);
+}
+
+public function getIdentityProofAttribute($value)
+{
+    return Storage::url($value);
+}
+
+public function getModeratorPictureAttribute($value)
+{
+    return Storage::url($value);
+}
 }

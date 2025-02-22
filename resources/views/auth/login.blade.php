@@ -13,16 +13,16 @@
             <h2>Login</h2>
             <!-- Alert Messages -->
             <div class="mt-5">
-                @if($errors->any())
-                    <div class="col-12">
-                        @foreach($errors->all() as $error)
-                            <div class="alert alert-danger">{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
-
                 @if(session()->has('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+
+                @if($errors->any() && !session()->has('error'))
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            {{ $error }}<br>
+                        @endforeach
+                    </div>
                 @endif
 
                 @if(session('success'))
@@ -68,6 +68,10 @@
                 <div>
                     <a href="{{ route('forget.password') }}">Forget Password</a>
                 </div>
+
+                <div>
+                    <a href="/">Back to home</a>
+                </div>
             </form>
 
             <p>Haven't got an account? <a href="{{ route('register.options') }}">Register now</a></p>
@@ -83,9 +87,6 @@
                 passwordInput.type = "text";
                 toggleIcon.classList.remove('fa-eye-slash');
                 toggleIcon.classList.add('fa-eye');
-
-
-                
             } else {
                 passwordInput.type = "password";
                 toggleIcon.classList.remove('fa-eye');

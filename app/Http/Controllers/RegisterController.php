@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\Moderator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ModeratorRequestEmail;
-use App\Mail\ModeratorWelcomeEmail;
-use App\Mail\ModeratorRegistrationNotification;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -32,6 +27,7 @@ class RegisterController extends Controller
                 'dateOfBirth' => $request->input('dateOfBirth'),
                 'contactNumber' => $request->input('contactNumber'),
                 'role' => 'Student',
+                'status' => 'active',
             ]);
 
             $student = Student::create([
@@ -69,7 +65,7 @@ class RegisterController extends Controller
                 $rules['contactNumber'] = 'required|string|regex:/^\d{10,15}$/|unique:users,contactNumber';
                 break;
             case 'password':
-                $rules['password'] = 'required|confirmed|min:6';
+                $rules['password'] = 'required|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|min:8';
                 break;
         }
 
@@ -93,7 +89,7 @@ class RegisterController extends Controller
             'contactNumber' => 'required|string|regex:/^\d{10,15}$/|unique:users,contactNumber',
             'gender' => 'required|string',
             'dateOfBirth' => 'required|date',
-            'password' => 'required|confirmed|regex:/^[A-Z][a-zA-Z\d]+[@.\/]$/|min:8',
+            'password' => 'required|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|min:8',
             'certification' => 'required|file|mimes:pdf|max:5120',
             'identityProof' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             'teacherPicture' => 'required|file|mimes:jpg,jpeg,png|max:2048',
@@ -116,20 +112,24 @@ class RegisterController extends Controller
                 'dateOfBirth' => $request->input('dateOfBirth'),
                 'contactNumber' => $request->input('contactNumber'),
                 'role' => 'Teacher',
+                'status' => 'pending',
             ]);
 
-            // Store files and create paths
+            // Store files and log the paths
             $certificationPath = $request->file('certification')->storeAs(
                 'certifications', $user->id . '_certification_' . now()->format('Ymd_His') . '.' . $request->file('certification')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Certification Path:', ['path' => $certificationPath]);
 
             $identityProofPath = $request->file('identityProof')->storeAs(
                 'identity_proofs', $user->id . '_identityProof_' . now()->format('Ymd_His') . '.' . $request->file('identityProof')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Identity Proof Path:', ['path' => $identityProofPath]);
 
             $teacherPicturePath = $request->file('teacherPicture')->storeAs(
                 'teacher_pictures', $user->id . '_teacherPicture_' . now()->format('Ymd_His') . '.' . $request->file('teacherPicture')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Teacher Picture Path:', ['path' => $teacherPicturePath]);
 
             Teacher::create([
                 'userID' => $user->id,
@@ -141,7 +141,6 @@ class RegisterController extends Controller
             ]);
 
             Log::info('Teacher created successfully. Redirecting to login page.');
-
             return redirect()->route('login')->with('success', 'Teacher registered successfully. Please log in.');
         } catch (\Exception $e) {
             Log::error('Teacher registration failed: ' . $e->getMessage(), ['exception' => $e]);
@@ -166,7 +165,7 @@ class RegisterController extends Controller
                 $rules['contactNumber'] = 'required|string|regex:/^\d{10,15}$/|unique:users,contactNumber';
                 break;
             case 'password':
-                $rules['password'] = 'required|confirmed|regex:/^[A-Z][a-zA-Z\d]+[@.\/]$/|min:8';
+                $rules['password'] = 'required|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|min:8';
                 break;
         }
 
@@ -190,7 +189,7 @@ class RegisterController extends Controller
             'contactNumber' => 'required|string|regex:/^\d{10,15}$/|unique:users,contactNumber',
             'gender' => 'required|string',
             'dateOfBirth' => 'required|date',
-            'password' => 'required|confirmed|regex:/^[A-Z][a-zA-Z\d]+[@.\/]$/|min:8',
+            'password' => 'required|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|min:8',
             'certification' => 'required|file|mimes:pdf|max:5120',
             'identityProof' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             'moderatorPicture' => 'required|file|mimes:jpg,jpeg,png|max:2048',
@@ -212,55 +211,35 @@ class RegisterController extends Controller
                 'dateOfBirth' => $request->input('dateOfBirth'),
                 'contactNumber' => $request->input('contactNumber'),
                 'role' => 'Moderator',
+                'status' => 'pending',
             ]);
 
+            // Store files and log the paths
             $certificationPath = $request->file('certification')->storeAs(
                 'certifications', $user->id . '_certification_' . now()->format('Ymd_His') . '.' . $request->file('certification')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Certification Path:', ['path' => $certificationPath]);
 
             $identityProofPath = $request->file('identityProof')->storeAs(
                 'identity_proofs', $user->id . '_identityProof_' . now()->format('Ymd_His') . '.' . $request->file('identityProof')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Identity Proof Path:', ['path' => $identityProofPath]);
 
             $moderatorPicturePath = $request->file('moderatorPicture')->storeAs(
                 'moderator_pictures', $user->id . '_moderatorPicture_' . now()->format('Ymd_His') . '.' . $request->file('moderatorPicture')->getClientOriginalExtension(), 'public'
             );
+            Log::info('Moderator Picture Path:', ['path' => $moderatorPicturePath]);
 
-            $moderator = Moderator::create([
+            Moderator::create([
                 'userID' => $user->id,
                 'name' => $user->name,
                 'certification' => $certificationPath,
                 'identityProof' => $identityProofPath,
                 'moderatorPicture' => $moderatorPicturePath,
-                'status' => 'pending',
             ]);
 
-            if (!$moderator || !$moderator->moderatorID) {
-                Log::error('Failed to retrieve Moderator ID after creation.');
-                return redirect()->back()->with('error', 'Moderator creation failed.');
-            }
-
-            Log::info('Moderator ID: ' . $moderator->moderatorID);
-
-            $moderatorInDB = Moderator::where('userID', $user->id)->firstOrFail();
-            if ($moderatorInDB) {
-                Log::info('Moderator found in database with ID: ' . $moderatorInDB->moderatorID);
-            } else {
-                Log::error('Moderator record not found in database.');
-                return redirect()->back()->with('error', 'Moderator record not found.');
-            }
-
-            Log::info('Moderator created successfully. Sending email.');
-
-            // Notify superuser
-            $superuser = User::where('role', 'Superuser')->first();
-            if ($superuser) {
-                Mail::to($superuser->email)->send(new ModeratorRegistrationNotification($moderator, $superuser));
-            } else {
-                Log::error('No superuser found.');
-            }
-
-            return redirect()->route('login')->with('success', 'Your registration is pending superuser approval.');
+            Log::info('Moderator created successfully. Redirecting to login page.');
+            return redirect()->route('login')->with('success', 'Moderator registered successfully. Please log in.');
         } catch (\Exception $e) {
             Log::error('Moderator registration failed: ' . $e->getMessage(), ['exception' => $e]);
             return redirect()->back()->with('error', 'Failed to register moderator. Error: ' . $e->getMessage());
@@ -284,7 +263,7 @@ class RegisterController extends Controller
                 $rules['contactNumber'] = 'required|string|regex:/^\d{10,15}$/|unique:users,contactNumber';
                 break;
             case 'password':
-                $rules['password'] = 'required|confirmed|regex:/^[A-Z][a-zA-Z\d]+[@.\/]$/|min:8';
+                $rules['password'] = 'required|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/|min:8';
                 break;
         }
 

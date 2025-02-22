@@ -1,0 +1,32 @@
+.question-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+.question-header {
+    background-color: #f8f9fa;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+.question-body {
+    padding: 10px;
+}
+.option-icon {
+    margin-right: 10px;
+}
+.correct-answer {
+    color: green;
+}
+.incorrect-answer {
+    color: red;
+}
+.add-option-form, .add-answer-form{
+    margin-top:20px;
+}
+.add-question-form {
+    margin-top: 20px;
+    display:none;
+}

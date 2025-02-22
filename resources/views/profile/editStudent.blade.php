@@ -1,63 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<x-layout>
     <title>Edit Student Profile</title>
     <link rel="stylesheet" href="{{ asset('css/edit_profile.css') }}">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <div class="profile-container">
-        <h2>Edit Student Profile</h2>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-        @if(session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        <form action="{{ route('profile.updateStudent', ['email' => $student->user->email]) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $student->name) }}" required>
-                @if ($errors->has('name'))
-                    <span class="error-message text-danger">{{ $errors->first('name') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" class="form-control" required>
-                    <option value="Male" {{ old('gender', $student->user->gender) == 'Male' ? 'selected' : '' }}>Male</option>
-                    <option value="Female" {{ old('gender', $student->user->gender) == 'Female' ? 'selected' : '' }}>Female</option>
-                </select>
-                @if ($errors->has('gender'))
-                    <span class="error-message text-danger">{{ $errors->first('gender') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="dateOfBirth">Birth Date</label>
-                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{{ old('dateOfBirth', $student->user->dateOfBirth) }}" required>
-                @if ($errors->has('dateOfBirth'))
-                    <span class="error-message text-danger">{{ $errors->first('dateOfBirth') }}</span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="contactNumber">Contact Number</label>
-                <input type="text" id="contactNumber" name="contactNumber" class="form-control" value="{{ old('contactNumber', $student->user->contactNumber) }}">
-                @if ($errors->has('contactNumber'))
-                    <span class="error-message text-danger">{{ $errors->first('contactNumber') }}</span>
-                @endif
-            </div>
-            <button type="submit" class="btn btn-primary">Update Profile</button>
-        </form>
+
+    <div class="main-content" id="main-content">
+        <div class="profile-container">
+            <h2>Edit Student Profile</h2>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <form action="{{ route('profile.updateStudent', ['email' => $student->user->email]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $student->name) }}" required>
+                    @if ($errors->has('name'))
+                        <span class="error-message text-danger">{{ $errors->first('name') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" class="form-control" required>
+                        <option value="Male" {{ old('gender', $student->user->gender) == 'Male' ? 'selected' : '' }}>Male</option>
+                        <option value="Female" {{ old('gender', $student->user->gender) == 'Female' ? 'selected' : '' }}>Female</option>
+                    </select>
+                    @if ($errors->has('gender'))
+                        <span class="error-message text-danger">{{ $errors->first('gender') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Birth Date</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{{ old('dateOfBirth', $student->user->dateOfBirth) }}" required>
+                    @if ($errors->has('dateOfBirth'))
+                        <span class="error-message text-danger">{{ $errors->first('dateOfBirth') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number</label>
+                    <input type="text" id="contactNumber" name="contactNumber" class="form-control" value="{{ old('contactNumber', $student->user->contactNumber) }}">
+                    @if ($errors->has('contactNumber'))
+                        <span class="error-message text-danger">{{ $errors->first('contactNumber') }}</span>
+                    @endif
+                </div>
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+            </form>
+        </div>
     </div>
+    
 
     <script>
         $(document).ready(function() {
@@ -110,5 +108,4 @@
             }
         });
     </script>
-</body>
-</html>
+</x-layout>

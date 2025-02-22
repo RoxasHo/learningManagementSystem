@@ -1,0 +1,198 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.course-header {
+    display: flex; 
+    flex-grow: 1; 
+    margin-right: 20px; 
+    padding: 100px 100px 60px 100px;
+}
+
+.course-image {
+    padding: 30px 30px 0 30px;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-right: 60px;
+}
+
+.tutor-section {
+    width: 250px; /* Set a width for the tutor section */
+    border-left: 2px solid #ccc; /* Vertical line */
+    padding-left: 60px; /* Space between the vertical line and tutor section */
+    padding-right: 400px;
+}
+
+.tutor-info {
+    margin-top: 10px; /* Space between each tutor info */
+}
+
+.tutor-image {
+    width: 50px; /* Adjust image size as necessary */
+    height: 50px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Circular image */
+}
+
+.tutor-name {
+    font-weight: bold; /* Optional: make the teacher's name bold */
+}
+
+.course-header-info {
+    flex: 1;
+    margin-right: 60px;
+}
+
+.course-header-info h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.course-header-info p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.button-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.course-description {
+    margin: 0 150px 100px 150px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-description h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.course-description p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 1.1rem;
+    color: #FFD700;
+    cursor: pointer;
+}
+
+.custom-button {
+    text-decoration: none; /* Remove underline */
+    margin-top: 20px; /* Add space above the button */
+    display: inline-block; /* Ensure margin is respected */
+    padding: 10px 30px; /* Optional: Add padding for better appearance */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background-color: #38b6ff; /* Secondary button color */
+    font-weight: bold;
+    color: white; /* Text color */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+}
+
+.custom-button:hover {
+    background-color: #3995cb; /* Darker shade on hover */
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px; 
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.star-rating span {
+    font-size: 24px; /* Adjust size as needed */
+    color: grey; /* Default star color */
+}
+
+.star-rating span.selected {
+    color: gold; /* Color for selected stars */
+}
+
+.spacer {
+    height: 50px;
+}

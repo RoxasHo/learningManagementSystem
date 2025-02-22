@@ -64,130 +64,103 @@
     </div>
 
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('registerStudentForm');
-    const passwordInput = document.getElementById('password');
-    const genderInputs = document.querySelectorAll('input[name="gender"]');
-    const dateOfBirthInput = document.getElementById('dateOfBirth');
-    const criteria = {
-        length: document.getElementById('lengthCriteria'),
-        uppercase: document.getElementById('uppercaseCriteria'),
-        lowercase: document.getElementById('lowercaseCriteria'),
-        number: document.getElementById('numberCriteria'),
-        specialChar: document.getElementById('specialCharCriteria')
-    };
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registerStudentForm');
+            const passwordInput = document.getElementById('password');
+            const criteria = {
+                length: document.getElementById('lengthCriteria'),
+                uppercase: document.getElementById('uppercaseCriteria'),
+                lowercase: document.getElementById('lowercaseCriteria'),
+                number: document.getElementById('numberCriteria'),
+                specialChar: document.getElementById('specialCharCriteria')
+            };
 
-    function validatePassword() {
-        const password = passwordInput.value;
-        const lengthValid = password.length >= 8;
-        const uppercaseValid = /[A-Z]/.test(password);
-        const lowercaseValid = /[a-z]/.test(password);
-        const numberValid = /[0-9]/.test(password);
-        const specialCharValid = /[!@#$%^&*]/.test(password);
+            function validatePassword() {
+                const password = passwordInput.value;
+                const lengthValid = password.length >= 8;
+                const uppercaseValid = /[A-Z]/.test(password);
+                const lowercaseValid = /[a-z]/.test(password);
+                const numberValid = /\d/.test(password);
+                const specialCharValid = /[!@#$%^&*]/.test(password);
 
-        criteria.length.classList.toggle('valid', lengthValid);
-        criteria.uppercase.classList.toggle('valid', uppercaseValid);
-        criteria.lowercase.classList.toggle('valid', lowercaseValid);
-        criteria.number.classList.toggle('valid', numberValid);
-        criteria.specialChar.classList.toggle('valid', specialCharValid);
+                criteria.length.classList.toggle('valid', lengthValid);
+                criteria.uppercase.classList.toggle('valid', uppercaseValid);
+                criteria.lowercase.classList.toggle('valid', lowercaseValid);
+                criteria.number.classList.toggle('valid', numberValid);
+                criteria.specialChar.classList.toggle('valid', specialCharValid);
 
-        return lengthValid && uppercaseValid && lowercaseValid && numberValid && specialCharValid;
-    }
-
-    function validateGender() {
-        let genderSelected = false;
-        genderInputs.forEach(input => {
-            if (input.checked) {
-                genderSelected = true;
+                return lengthValid && uppercaseValid && lowercaseValid && numberValid && specialCharValid;
             }
-        });
-        return genderSelected;
-    }
 
-    function validateDateOfBirth() {
-        return dateOfBirthInput.value !== '';
-    }
+            passwordInput.addEventListener('input', validatePassword);
 
-    passwordInput.addEventListener('input', validatePassword);
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const errorElements = document.querySelectorAll('.text-danger');
+                errorElements.forEach(element => element.textContent = '');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const errorElements = document.querySelectorAll('.text-danger');
-        errorElements.forEach(element => element.textContent = '');
+                let isValid = true;
 
-        let isValid = true;
-
-        if (!validatePassword()) {
-            document.getElementById('passwordError').textContent = 'Password does not meet criteria';
-            isValid = false;
-        }
-
-        if (!validateGender()) {
-            document.getElementById('genderError').textContent = 'Gender is required';
-            isValid = false;
-        }
-
-        if (!validateDateOfBirth()) {
-            document.getElementById('dateOfBirthError').textContent = 'Date of Birth is required';
-            isValid = false;
-        }
-
-        if (isValid) {
-            const formData = new FormData(this);
-
-            axios.post('{{ route('student.register') }}', formData)
-    .then(response => {
-        if (response.data.redirect) {
-            window.location.href = response.data.redirect;
-        }else{
-            window.location.href = '{{ route('login') }}';
-
-        }
-    })
-    .catch(error => {
-        if (error.response && error.response.data.errors) {
-            const errors = error.response.data.errors;
-            for (const key in errors) {
-                if (errors.hasOwnProperty(key)) {
-                    const errorElement = document.getElementById(key + 'Error');
-                    if (errorElement) {
-                        errorElement.textContent = errors[key][0];
-                    }
+                if (!validatePassword()) {
+                    document.getElementById('passwordError').textContent = 'Password does not meet criteria';
+                    isValid = false;
                 }
-            }
-        }
-    });
-        }
-    });
 
-    form.querySelectorAll('input, select, textarea').forEach(input => {
-        input.addEventListener('blur', function() {
-            const formData = new FormData(form);
-            formData.append('field', this.name);
+                if (isValid) {
+                    const formData = new FormData(this);
 
-            axios.post('{{ route('student.validate') }}', formData)
-                .then(response => {
-                    const errorElement = document.getElementById(this.name + 'Error');
-                    if (errorElement) {
-                        errorElement.textContent = '';
-                    }
-                })
-                .catch(error => {
-                    if (error.response && error.response.data.errors) {
-                        const errors = error.response.data.errors;
-                        for (const key in errors) {
-                            if (errors.hasOwnProperty(key)) {
-                                const errorElement = document.getElementById(key + 'Error');
-                                if (errorElement) {
-                                    errorElement.textContent = errors[key][0];
+                    axios.post('{{ route('student.register') }}', formData)
+                        .then(response => {
+                            if (response.data.redirect) {
+                                window.location.href = response.data.redirect;
+                            } else {
+                                window.location.href = '{{ route('login') }}';
+                            }
+                        })
+                        .catch(error => {
+                            if (error.response && error.response.data.errors) {
+                                const errors = error.response.data.errors;
+                                for (const key in errors) {
+                                    if (errors.hasOwnProperty(key)) {
+                                        const errorElement = document.getElementById(key + 'Error');
+                                        if (errorElement) {
+                                            errorElement.textContent = errors[key][0];
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
+                        });
+                }
+            });
+
+            form.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('blur', function() {
+                    const formData = new FormData(form);
+                    formData.append('field', this.name);
+
+                    axios.post('{{ route('student.validate') }}', formData)
+                        .then(response => {
+                            const errorElement = document.getElementById(this.name + 'Error');
+                            if (errorElement) {
+                                errorElement.textContent = '';
+                            }
+                        })
+                        .catch(error => {
+                            if (error.response && error.response.data.errors) {
+                                const errors = error.response.data.errors;
+                                for (const key in errors) {
+                                    if (errors.hasOwnProperty(key)) {
+                                        const errorElement = document.getElementById(key + 'Error');
+                                        if (errorElement) {
+                                            errorElement.textContent = errors[key][0];
+                                        }
+                                    }
+                                }
+                            }
+                        });
                 });
+            });
         });
-    });
-});
     </script>
 </body>
 </html>

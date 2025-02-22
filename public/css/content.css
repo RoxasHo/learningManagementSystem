@@ -1,0 +1,386 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.course-header {
+    display: flex; 
+    flex-grow: 1; 
+    margin-right: 20px; 
+    padding: 100px 100px 60px 100px;
+}
+
+.course-image {
+    padding: 30px 30px 0 30px;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin-right: 60px;
+}
+
+.tutor-section {
+    width: 250px; /* Set a width for the tutor section */
+    border-left: 2px solid #ccc; /* Vertical line */
+    padding-left: 60px; /* Space between the vertical line and tutor section */
+    padding-right: 400px;
+}
+
+.tutor-info {
+    margin-top: 10px; /* Space between each tutor info */
+}
+
+.tutor-image {
+    width: 50px; /* Adjust image size as necessary */
+    height: 50px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Circular image */
+}
+
+.tutor-name {
+    font-weight: bold; /* Optional: make the teacher's name bold */
+}
+
+.course-header-info {
+    flex: 1;
+    margin-right: 60px;
+}
+
+.course-header-info h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.course-header-info p {
+    font-size: 1.1rem;
+    margin: 5px 0;
+    color: #555;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.course-description {
+    margin: 0 150px 0 150px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.course-description h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.course-description p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 1.1rem;
+    color: #FFD700;
+}
+
+.custom-button {
+    text-decoration: none; /* Remove underline */
+    margin-top: 20px; /* Add space above the button */
+    display: inline-block; /* Ensure margin is respected */
+    padding: 10px 30px; /* Optional: Add padding for better appearance */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background-color: #38b6ff; /* Secondary button color */
+    font-weight: bold;
+    color: white; /* Text color */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+}
+
+.custom-button:hover {
+    background-color: #3995cb; /* Darker shade on hover */
+}
+
+.container {
+    display: flex;
+    margin: 0 auto 60px auto;
+    max-width: 1500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.left, .right {
+    padding: 20px;
+}
+
+.left {
+    width: 15%;
+    border-right: 1px solid #ddd;
+}
+
+.right {
+    width: 80%;
+}
+
+.section-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.chapter-item {
+    margin-bottom: 15px;
+}
+
+.chapter-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chapter-text {
+    flex-grow: 1; /* Takes up available space */
+}
+
+.chapter-icons {
+    display: flex;
+    align-items: center;
+}
+
+.chapter-icons i {
+    margin-left: 10px; /* Add space between the icons */
+}
+
+.lock-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
+
+.chapter-content {
+    padding-left: 20px;
+    gap: 5px;
+}
+/* To remove the underline and style the dropdown buttons */
+.dropdown-list a {
+    text-decoration: none; /* Remove the underline */
+    font-size: 14px; /* Adjust font size */
+    padding: 8px 16px; /* Adjust padding for button size */
+    display: inline-block; /* Ensure it behaves like a button */
+    width: auto; /* Ensure the button size isn't too wide */
+}
+
+.dropdown-button {
+    margin-bottom: 8px; /* Add some spacing between buttons */
+}
+
+/* Adjust button size and appearance */
+.btn-secondary.dropdown-button {
+    font-size: 14px; /* Set the font size to something smaller */
+    padding: 8px 12px; /* Reduce padding for a smaller button */
+    border-radius: 4px; /* Adjust button corners */
+}
+
+/* Optional: if you want the buttons to stretch full width */
+.dropdown-list li {
+    list-style-type: none; /* Remove bullet points from list items */
+}
+
+/* Remove default list padding and margins */
+.dropdown-list {
+    padding: 5px;
+    margin: 0;
+}
+
+.material-content {
+    margin-bottom: 20px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.question-group {
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+/*.container {
+    background-color: black;
+    display: flex;
+    gap: 20px;
+}
+
+ Left Section
+.left {
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.left .btn-primary {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.left .btn-primary:hover {
+    background-color: black;
+}
+
+.bi-check-circle {
+    margin-left: 10px;
+}
+
+.bi-lock-fill {
+    margin-left: 10px;
+    color: #dc3545;
+}
+
+#chapterContent {
+    margin-top: 10px;
+}
+
+#chapterContent ul li {
+    margin: 10px 0;
+}
+
+#chapterContent .btn-secondary {
+    width: 100%;
+    background-color: #6c757d;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#chapterContent .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.right {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: black;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-container {
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.content-body {
+    margin-top: 20px;
+}
+
+.question-group {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.question-group h5 {
+    font-size: 20px;
+    color: #333;
+}
+
+.question p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: black;
+} */

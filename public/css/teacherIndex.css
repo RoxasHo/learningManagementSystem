@@ -1,0 +1,174 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+/* Main content adjustments */
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.container {
+    padding: 40px 150px;
+    min-height: 700px;
+}
+.container h5 {
+    font-size: 3vw;
+}
+
+.floating-button {
+    position: fixed;
+    right: 20px;              /* Distance from the right side */
+    top: 50%;                 /* Vertical center of the screen */
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.floating-button:hover {
+    background-color: #0056b3; /* Darken color on hover */
+}
+
+.floating-form {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    z-index: 1000;
+}
+
+.floating-form input,
+.floating-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.floating-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.floating-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Close button */
+.close-button {
+    background-color: #6c757d;
+    color: white;
+    margin-right: 10px;
+}
+
+.close-button:hover {
+    background-color: #5a6268;
+}
+
+.table {
+    width: 100%; /* Make the table take full width of the container */
+    margin-bottom: 20px; /* Optional margin for spacing below the table */
+    border-collapse: collapse; /* Ensure borders are collapsed */
+}
+
+/* Course list table */
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+    text-align: center; /* Center-align table content */
+    vertical-align: middle; /* Vertically center-align content */
+    padding: 10px;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 12px 15px;
+}
+
+.table td {
+    background-color: #ffffff;
+    padding: 12px 15px;
+}
+
+/* Floating button on small screens */
+@media (max-width: 768px) {
+    .floating-button {
+        width: 50px;
+        height: 50px;
+        font-size: 18px;
+    }
+
+    .floating-form {
+        width: 250px;
+        padding: 15px;
+    }
+
+    .floating-form input,
+    .floating-form select {
+        padding: 8px;
+    }
+}
+
+#add-course-button {
+    margin-bottom: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.table {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}

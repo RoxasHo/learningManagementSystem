@@ -19,13 +19,14 @@ class User extends Authenticatable
         'gender',
         'dateOfBirth',
         'contactNumber',
+        'status',
+        'rejection_reason',
         'role',
         'profile',
         'feedback',
         'remember_token',
         'token',
         'token_created_at',
-        'point',
         'last_login_at',
         'registeredAt',
     ];
@@ -65,9 +66,7 @@ public function teacher()
                 throw new \Exception('Email already exists.');
             }
 
-            if (User::where('name', $user->name)->exists()) {
-                throw new \Exception('Name already exists.');
-            }
+           
 
             if (User::where('contactNumber', $user->contactNumber)->exists()) {
                 throw new \Exception('Contact number already exists.');
@@ -78,4 +77,26 @@ public function teacher()
             }
         });
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'userID');
+    }
+
+    public function followedTags()
+    {
+        return $this->hasMany(FollowedTags::class, 'userID');
+    }
+
+    public function hasCompletedQuestionnaire()
+    {
+        return QuestionnaireResponse::where('user_id', $this->id)->exists();
+    }
+
+
+    public function questionnaireResponses()
+    {
+        return $this->hasMany(QuestionnaireResponse::class);
+    }
+
 }

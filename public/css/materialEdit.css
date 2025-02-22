@@ -1,0 +1,92 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+/* Main content adjustments */
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+/* Main form container */
+.material-form {
+    background-color: #f8f9fa;  /* Light gray background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    width: 80%;              /* Form width */
+    margin-right: 20px;         /* Add margin from the right edge */
+    min-height: 500px;
+    font-family: 'Arial', sans-serif;  /* Font style */
+}
+
+/* Form group for labels and text areas */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.material-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+/* Text area (CKEditor) */
+.material-form textarea {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 14px;
+    resize: vertical;
+    background-color: white;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit button */
+.save-button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for submit button */
+.save-button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .material-form {
+        float: none;
+        width: 100%;
+        margin: 0;
+    }
+}

@@ -23,16 +23,16 @@
 
         <form action="{{ route('profile.updateTeacher', ['email' => $teacher->user->email]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST') <!-- Ensure that we are using the POST method -->
+            @method('POST')
             <div class="form-group">
                 <label for="name">Full Name:</label>
                 <input type="text" id="name" name="name" class="form-control" value="{{ $teacher->user->name }}" required>
-                <span class="error-message text-danger"></span>
+                <span id="nameError" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="contactNumber">Contact Number:</label>
                 <input type="text" id="contactNumber" name="contactNumber" class="form-control" value="{{ $teacher->user->contactNumber }}" required>
-                <span class="error-message text-danger"></span>
+                <span id="contactNumberError" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="gender">Gender:</label>
@@ -40,27 +40,27 @@
                     <option value="Male" {{ $teacher->user->gender == 'Male' ? 'selected' : '' }}>Male</option>
                     <option value="Female" {{ $teacher->user->gender == 'Female' ? 'selected' : '' }}>Female</option>
                 </select>
-                <span class="error-message text-danger"></span>
+                <span id="genderError" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dateOfBirth">Date of Birth:</label>
                 <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{{ $teacher->user->dateOfBirth }}" required>
-                <span class="error-message text-danger"></span>
+                <span id="dateOfBirthError" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="yearsOfExperience">Years of Experience:</label>
                 <input type="number" id="yearsOfExperience" name="yearsOfExperience" class="form-control" value="{{ $teacher->yearsOfExperience }}" required>
-                <span class="error-message text-danger"></span>
+                <span id="yearsOfExperienceError" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="certification">Certification (PDF, DOC, DOCX):</label>
-                <input type="file" id="certification" name="certification" class="form-control" accept=".pdf,.doc,.docx">
-                <span class="error-message text-danger"></span>
+                <label for="certification">Submit Proof of Certification (Max 5MB, PDF only):</label>
+                <input type="file" id="certification" name="certification" class="form-control" accept=".pdf"  accept="application/pdf">
+                <span id="certificationError" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label for="identityProof">Identity Proof (PDF, DOC, DOCX):</label>
-                <input type="file" id="identityProof" name="identityProof" class="form-control" accept=".pdf,.doc,.docx">
-                <span class="error-message text-danger"></span>
+                <label for="identityProof">Identity Proof (Max 2MB, Image only(png,jpg,jpeg)):</label>
+                <input type="file" id="identityProof" name="identityProof" class="form-control" accept=".jpg,.jpeg,.png"  accept="image/*">
+                <span id="identityProofError" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
@@ -75,6 +75,7 @@
             function validateField(element) {
                 let value = element.val();
                 let id = element.attr('id');
+                let file = element[0].files[0];
                 let errorMessage = '';
 
                 switch (id) {
@@ -99,13 +100,17 @@
                         }
                         break;
                     case 'certification':
-                        if (element[0].files[0] && element[0].files[0].size > 2048 * 1024) {
-                            errorMessage = 'Certification file size must not exceed 2MB.';
+                        if (file && file.size > 5 * 1024 * 1024) { // 5MB
+                            errorMessage = 'Certification file size must not exceed 5MB.';
+                        } else if (file && !/\.pdf$/.test(file.name)) {
+                            errorMessage = 'Certification must be a PDF file.';
                         }
                         break;
                     case 'identityProof':
-                        if (element[0].files[0] && element[0].files[0].size > 2048 * 1024) {
+                        if (file && file.size > 2 * 1024 * 1024) { // 2MB
                             errorMessage = 'Identity Proof file size must not exceed 2MB.';
+                        } else if (file && !/\.(jpg|jpeg|png)$/i.test(file.name)) {
+                            errorMessage = 'Identity Proof must be an image file (JPG, JPEG, PNG).';
                         }
                         break;
                 }
@@ -118,9 +123,9 @@
             }
 
             function showError(element, message) {
-                let errorElement = element.next('.error-message');
+                let errorElement = $('#' + element.attr('id') + 'Error');
                 if (!errorElement.length) {
-                    errorElement = $('<span class="error-message text-danger"></span>').insertAfter(element);
+                    errorElement = $('<span id="' + element.attr('id') + 'Error" class="text-danger"></span>').insertAfter(element);
                 }
                 errorElement.text(message);
                 element.addClass('is-invalid');
@@ -128,7 +133,7 @@
 
             function clearError(element) {
                 element.removeClass('is-invalid');
-                element.next('.error-message').remove();
+                $('#' + element.attr('id') + 'Error').remove();
             }
         });
     </script>

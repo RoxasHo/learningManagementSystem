@@ -61,11 +61,11 @@
             <input type="file" id="certification" name="certification" accept=".pdf" required>
             <span id="certificationError" class="text-danger"></span>
 
-            <label for="identityProof">Identity Proof (Max 2MB, Image only):</label>
+            <label for="identityProof">Identity Proof (Max 2MB, Image only(png,jpg,jpeg)):</label>
             <input type="file" id="identityProof" name="identityProof" accept=".jpg,.jpeg,.png" required>
             <span id="identityProofError" class="text-danger"></span>
 
-            <label for="teacherPicture">Teacher Picture (Max 2MB, Image only):</label>
+            <label for="teacherPicture">Teacher Picture (Max 2MB, Image only(png,jpg,jpeg)):</label>
             <input type="file" id="teacherPicture" name="teacherPicture" accept=".jpg,.jpeg,.png" required>
             <span id="teacherPictureError" class="text-danger"></span>
 

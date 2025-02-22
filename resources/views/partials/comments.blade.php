@@ -1,0 +1,108 @@
+@if($comments->isNotEmpty())
+    <ul class="comments-list">
+        @foreach($comments->where('is_visible', true) as $reply)
+        <div class="reply-indent" style="margin-left: 20px;">
+            <li class="comment-item">
+                <!-- Comment author details -->
+                <div class="comment-author-info">
+                @if($reply->user->role === 'Teacher')
+                                        <img src="{{ asset($reply->user->teacher->teacherPicture) }}" alt="{{ $reply->user->name }}" class="profile-image">
+                                    @elseif($reply->user->role === 'Student')
+                                        <img src="{{ $reply->user->student->studentPicture ? asset('storage/' . $reply->user->student->studentPicture) : asset('images/default-profile.png') }}" alt="{{ $reply->user->name }}" class="profile-image">
+                                    @elseif($reply->user->role === 'Moderator')
+                                        <img src="{{ asset($reply->user->moderator->moderatorPicture) }}" alt="{{ $reply->user->name }}" class="profile-image">
+                                    @else
+                                        <img src="{{ asset('images/default-profile.png') }}" alt="Default Profile" class="default-image">
+                                    @endif
+
+                <div class="author-and-delete">
+                    <div class="author-details">
+                        <div class="comment-author">
+                            <strong>{{ $reply->user->name }}</strong> replied to <strong>{{ $comment->user->name }}</strong>
+                        </div>
+                        <div class="comment-date-role">
+                            <span class="bullet">&#8226;</span> <!-- Bullet separator -->
+                            <span class="comment-role">
+                                @if($reply->userID == $post->userID)
+                                    Author
+                                @else
+                                    {{ $reply->user->role }}
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+
+                        
+    <div class="comment-actions">
+        <span class="material-symbols-outlined more-button">
+            more_vert
+        </span>
+
+        <!-- Hidden action menu with delete and report icons -->
+        <div class="action-menu">
+        @if(auth()->check() && auth()->user()->id == $reply->userID)
+            <form action="{{ route('comment.destroy', $reply->comment_id) }}"   method="POST" class="delete-form">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button" style="background: none; border: none; cursor: pointer;">
+                    <span class="material-symbols-outlined delete-icon">delete</span>
+                </button>
+            </form>
+        @endif
+        @if(auth()->check() && auth()->user()->id != $reply->userID)
+        <span class="material-symbols-outlined report-icon" id="openReportModal" id="openReportModal" data-post-id="{{ $post->post_id }}" data-comment-id="{{ $reply->comment_id }}">report</span>
+        @endif
+        </div>
+    </div>
+
+                </div>
+                </div>
+
+                <p>{!! $reply->content !!}</p>
+
+      
+
+                <!-- Vote Forms for Comments -->
+                <div class="comment-ratings-container" data-comment-id="{{ $reply->comment_id }}">
+                    <form class="comment-vote-form" action="{{ route('comment.like') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="comment_id" value="{{ $reply->comment_id }}">
+                        <input type="hidden" name="post_id" value="{{ $post->post_id }}">
+                        <button type="submit" class="vote-button" style="background: none; border: none; cursor: pointer;">
+                            <span class="comment-rating-button comment-like-button material-icons {{ $reply->userHasLiked($user) ? 'liked' : '' }}" data-type="like" data-comment-id="{{ $reply->comment_id }}">thumb_up</span>
+                            <span class="comment-rating-count" data-type="like" data-comment-id="{{ $reply->comment_id }}">{{ $reply->likes->count() }}</span>
+                        </button>
+                    </form>
+
+                    <form class="comment-vote-form" action="{{ route('comment.dislike') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="comment_id" value="{{ $reply->comment_id }}">
+                        <input type="hidden" name="post_id" value="{{ $post->post_id }}">
+                        <button type="submit" class="vote-button" style="background: none; border: none; cursor: pointer;">
+                            <span class="comment-rating-button comment-dislike-button material-icons {{ $reply->userHasDisliked($user) ? 'disliked' : '' }}" data-type="dislike" data-comment-id="{{ $reply->comment_id }}">thumb_down</span>
+                            <span class="comment-rating-count" data-type="dislike" data-comment-id="{{ $reply->comment_id }}">{{ $reply->dislikes->count() }}</span>
+                        </button>
+                    </form>
+                    <button class="reply-button" data-comment-id="{{ $reply->comment_id }}">
+                        <span class="material-symbols-outlined">reply_all</span>
+                        Reply
+                    </button>
+                </div>
+                <small>Posted on {{ $reply->created_at->format('F j, Y, g:i a') }}</small>
+
+                <!-- Reply CKEditor for replies -->
+                <div class="reply-editor-container" id="reply-editor-{{ $reply->comment_id }}" style="display: none;">
+                    <form method="POST" action="{{ route('comment.reply', ['post_id' => $post->post_id, 'parent_comment_id' => $reply->comment_id]) }}" onsubmit="return validateReplyForm({{ $reply->comment_id }})">
+                        @csrf
+                        <textarea id="editor-{{ $reply->comment_id }}" name="content"></textarea>
+                        <button type="submit">Send Reply</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Recursively display nested replies -->
+            @include('partials.comments', ['comments' => $reply->replies, 'level' => $level + 1])
+        </li>
+        @endforeach
+    </ul>
+@endif

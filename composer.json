@@ -6,10 +6,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "fruitcake/php-cors": "^1.3",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "spatie/laravel-permission": "^6.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -18,8 +18,7 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "pestphp/pest": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.0"
+        "phpunit/phpunit": "^11.0.1"
     },
     "autoload": {
         "psr-4": {

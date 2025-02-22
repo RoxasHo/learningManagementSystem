@@ -1,0 +1,693 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+/* Main content adjustments */
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.image-container {
+    display: flex;
+    position: relative;
+    justify-content: right;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.fade-image {
+    margin-right: 120px;
+    width: 50%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 2;
+}
+
+.fade-image.visible {
+    opacity: 1;
+}
+
+.image-bg {
+    position: absolute;
+    width: 50%;
+    z-index: 1;
+    margin-right: 30px;
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 20%;
+    left: 10%;
+    width: 45%;
+    padding: 10px;
+    transform: translateY(100%);
+    animation: slide-in 1.5s ease forwards; 
+    z-index: 4;
+}
+
+.text-overlay h2 {
+    color: black;
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    font-size: 2vw;
+    font-weight: bold;
+    text-align: left;
+}
+
+.text-overlay p {
+    color: black;
+    /* background-color: rgba(0, 0, 0, 0.5);  */
+    font-size: 1vw;
+    font-weight:lighter;
+    text-align: left;
+    margin-bottom: 60px;
+}
+
+.text-overlay a{
+    color: white;
+    background-color: #38b6ff;
+    font-size: 1vw;
+    padding: 5px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+.text-overlay a:hover {
+    background-color: #3995cb;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(100%); /* Start from below */
+        opacity: 0; /* Start invisible */
+    }
+    to {
+        transform: translateY(0); /* Move to original position */
+        opacity: 1; /* Fully visible */
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform: translateY(0); /* Start from original position */
+        opacity: 1; /* Fully visible */
+    }
+    to {
+        transform: translateY(100%); /* Move down off-screen */
+        opacity: 0; /* Fully invisible */
+    }
+}
+
+/*Collaborators*/
+.collaborators {
+    padding: 60px 0;
+    background-color: #eeeeee;
+    text-align: center;
+    color: #111;
+}
+
+.collaborators li{
+    padding-top: 10px;
+    list-style: none;
+    justify-content: center;
+    gap: 10px;
+    display: flex;
+}
+
+/* Courses */
+.course-container-wrapper {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.course-container {
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(150px);
+    opacity: 0;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.course-container.visible{
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.course-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.course-container-wrapper a {
+    text-decoration: none;
+    outline: none;
+}
+
+.course-container-wrapper:focus a {
+    text-decoration: none;
+    outline: none;
+}
+
+.course-container-header {
+    height: 100px;
+    background-color: #38b6ff;
+}
+
+.course-header-image {
+    background-size: 40%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100px;
+    filter: invert(100%);
+}
+
+.course-container-content {
+    flex-grow: 1; 
+    padding: 20px 20px 10px 20px; 
+}
+
+.course-container-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #111;
+}
+
+.course-container-content p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.star-rating {
+    display: inline-block;
+    font-size: 12px; /* Adjust size as needed */
+    color: #FFD700; /* Gold color for the stars */
+}
+
+.star-rating .fa-star,
+.star-rating .fa-star-half-alt {
+    margin-right: 4px;
+}
+
+.course-container hr {
+    margin-top: auto;
+    width: 90%;
+    box-shadow: 1px 3px 12px 1px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.course-container-footer {
+    margin-top: auto;
+    padding: 10px 30px 20px;
+}
+
+.course-container-footer p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 2px;
+}
+
+.teacher-info {
+    display: flex;
+    align-items: center; /* Center the items vertically */
+}
+
+.teacher-image {
+    width: 30px; /* Adjust the size as needed */
+    height: 30px; /* Same as width for circular shape */
+    border-radius: 50%; /* Make it circular */
+    margin-right: 10px; /* Space between image and text */
+    object-fit: cover; /* Ensures the image covers the circle */
+}
+
+hr {
+    margin-top: 50px;
+    width: 95%;
+    box-shadow: 1px 3px 12px 1px rgba(0, 0, 0, 0.1);/*come dc*//*你说的对，但是原神是一款由米哈游自主研发的大世界游戏，在这里你将扮演一个名为旅行者的角色并找回走失的亲人*/
+    text-decoration: none;
+    outline: none;
+}
+
+#enrolled-courses {
+    padding: 90px 100px 0;
+    background-color: #fff;
+}
+
+#trending-courses {
+    padding: 90px 100px 0;
+    background-color: #fff;
+}
+
+#newly-created-courses {
+    padding: 50px 100px 0;
+    background-color: #fff;
+}
+
+#most-rated-courses {
+    padding: 50px 100px 0;
+    background-color: #fff;
+}
+
+#suggested-courses {
+    padding: 50px 100px 0;
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+/*Floating page*/
+.floating-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/*Floating questionnaire*/
+.floating-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+#blurContent.blur {
+    filter: blur(5px);
+    pointer-events: none; /* Prevent interactions with blurred elements */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.addConButton{
+    background-color: #1967D2;
+    color: #fff;
+    cursor: pointer;
+    border: 2px solid #1967D2;
+    border-radius: 5px;
+    padding: 4px 12px;
+}
+
+/* Container for sorting and filtering */
+.sort-filter-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px; /* Space between sorting and filtering */
+    margin: 20px 0;
+}
+
+.sort-container, .sort-order-container, .filter-container {
+    margin: 20px 0;
+    text-align: right; /* Align to the right of the page */
+}
+
+.sort-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between label and select */
+}
+
+.sort-container label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.sort-container select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+/* Sorting Order Radio Buttons */
+.sort-order-container {
+    margin-top: 30px;
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.filter-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between elements */
+}
+
+.filter-container label {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.filter-container select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.filter-container #filter-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    display: inline-block; /* To align with other elements */
+}
+
+.filter-container #apply-filter {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0px 30px;
+}
+
+.filter-container #apply-filter:hover {
+    background-color: #0056b3;
+}
+
+/* Search bar container */
+.search-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1; /* Light grey for contrast */
+    padding: 5px 15px;
+    border-radius: 25px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Search input */
+.search-input {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    outline: none;
+    flex-grow: 1;
+    font-size: 16px;
+    background-color: transparent; /* Matches the background */
+}
+
+/* Search button */
+.search-button {
+    border: none;
+    background-color: #007bff; /* Primary color */
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+}
+
+.search-button:hover {
+    background-color: #0056b3; /* Darker blue for hover */
+}
+
+.hot-courses-container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.hot-courses {
+    display: flex;
+    gap: 15px;
+}
+
+/* Hot Courses Wrapper - Makes the container horizontally scrollable */
+.hot-courses-wrapper {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    display: flex;
+    justify-content: center; /* Center the scrolling area */
+    margin-bottom: 20px; /* Adds space below the hot courses section */
+    flex-direction: row;
+    padding: 10px; /* Optional: add padding for better visuals */
+    margin-left: 20px; /* Add some margin to avoid overlapping with sidebar */
+    gap: 15px;
+}
+
+/* Hot Courses Container - Aligns the courses in a row */
+.hot-courses-container {
+    width: 400px; /* Fixed width for each container */
+    height: 200px; /* Fixed height for each container */
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.hot-courses-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.hot-courses-container h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 10px;
+}
+
+.hot-courses-container p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+.hot-courses-container .increment-button:hover {
+    background-color: #0056b3;
+}
+
+.hot-courses-container .rating, .container .difficulty {
+    font-weight: bold;
+}
+
+.hot-courses-container .rating {
+    color: #ff9800;
+}
+
+.hot-courses-container .difficulty {
+    color: #666;
+}
+
+.suggested-courses-wrapper {
+    margin-top: 30px;
+}
+
+.suggested-courses-wrapper h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+/* .increment-button{
+    background-color: #1967D2;
+    color: #fff;
+    cursor: pointer;
+    border: 2px solid #1967D2;
+    border-radius: 5px;
+    padding: 4px 12px;
+    margin-right: 15px;
+} */
+
+.add-container, .reset-container, .show-form-container {
+    margin: 20px 0;
+}
+.top-courses {
+    margin-top: 40px;
+}
+.top-container {
+    background-color: #e0e0e0;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.blur-background {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+}
+.blur-background > * {
+    pointer-events: none; /* Prevent interactions with blurred elements */
+}
+
+#quesForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}   
+
+/* Hide the form by default */
+.floating-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+}
+
+/* Style the button to float in the bottom right corner */
+.floating-add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Add a blur effect to the background */
+#blurContent.blur {
+    filter: blur(5px);
+}
+
+/* Floating form styles */
+#quesForm {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#quesForm button.close {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#quesForm button.submit {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+        }

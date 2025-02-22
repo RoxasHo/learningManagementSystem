@@ -7,14 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/register_moderator.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <script>
-        // Pass Laravel routes to JavaScript
-        const routes = {
-            validate: "{{ route('moderator.validate') }}",
-            login: "{{ route('login') }}"
-        };
-    </script>
 </head>
 <body>
     <div class="registration-form">
@@ -70,11 +62,11 @@
             <input type="file" id="certification" name="certification" required accept="application/pdf">
             <span id="certificationError" class="text-danger"></span>
 
-            <label for="identityProof">Identity Proof (Max 2MB, Image only):</label>
+            <label for="identityProof">Identity Proof (Max 2MB, Image only(png,jpg,jpeg)):</label>
             <input type="file" id="identityProof" name="identityProof" required accept="image/*">
             <span id="identityProofError" class="text-danger"></span>
 
-            <label for="moderatorPicture">Moderator Picture (Max 2MB, Image only):</label>
+            <label for="moderatorPicture">Moderator Picture (Max 2MB, Image only(png,jpg,jpeg)):</label>
             <input type="file" id="moderatorPicture" name="moderatorPicture" required accept="image/*">
             <span id="moderatorPictureError" class="text-danger"></span>
 

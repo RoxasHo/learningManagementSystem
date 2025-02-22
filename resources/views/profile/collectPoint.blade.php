@@ -13,7 +13,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="pointModalLabel">Daily Login Bonus</h5>
-                        <a href="{{ route('profile.student', ['email' => Auth::user()->email]) }}" class="btn-close"></a>
+                        <a href="/" class="btn-close"></a>
                         @csrf
                     </div>
                     <div class="modal-body">
@@ -24,7 +24,7 @@
                     <div class="modal-footer">
                         @csrf
 
-                        <a href="{{ route('profile.student', ['email' => Auth::user()->email]) }}" class="btn btn-primary">Close</a>
+                        <a href="/" class="btn btn-primary">Close</a>
                         @csrf
                     </div>
                 </div>

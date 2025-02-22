@@ -1,0 +1,417 @@
+/* Global CSS rules */
+body {margin: 0; background-color: #fff;}
+
+.material-icons,
+.material-icons-outlined {
+    font-size: 35px;
+    cursor: pointer;
+    color: #2a3f58;
+}
+
+.main {
+    position: relative;
+}
+
+h1,h2,h3 {margin: 0;}
+
+/* Main content adjustments */
+.main-content {
+    margin-top: 85px;
+    transition: margin-left 0.3s ease;
+    margin-left: 60px;
+}
+
+.main-content.minimized { margin-left: 60px; }
+
+.main-content.expanded { margin-left: 250px; }
+
+.container {
+    display: flex;
+    margin: 150px auto 80px auto;
+    min-height: 700px;
+    max-width: 1500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.left, .right {
+    padding: 20px;
+}
+
+.left {
+    width: 15%;
+    border-right: 1px solid #ddd;
+}
+
+.right {
+    width: 80%;
+}
+
+.section-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #007bff;
+}
+
+.chapter-item {
+    margin-bottom: 15px;
+}
+
+.chapter-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.chapter-text {
+    flex-grow: 1; /* Takes up available space */
+}
+
+.chapter-icons {
+    display: flex;
+    align-items: center;
+}
+
+.chapter-icons i {
+    margin-left: 10px; /* Add space between the icons */
+}
+
+.lock-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
+
+.chapter-content {
+    padding-left: 20px;
+    gap: 5px;
+}
+/* To remove the underline and style the dropdown buttons */
+.dropdown-list a {
+    text-decoration: none; /* Remove the underline */
+    font-size: 14px; /* Adjust font size */
+    padding: 8px 16px; /* Adjust padding for button size */
+    display: inline-block; /* Ensure it behaves like a button */
+    width: auto; /* Ensure the button size isn't too wide */
+}
+
+.dropdown-button {
+    margin-bottom: 8px; /* Add some spacing between buttons */
+}
+
+/* Adjust button size and appearance */
+.btn-secondary.dropdown-button {
+    font-size: 14px; /* Set the font size to something smaller */
+    padding: 8px 12px; /* Reduce padding for a smaller button */
+    border-radius: 4px; /* Adjust button corners */
+}
+
+/* Optional: if you want the buttons to stretch full width */
+.dropdown-list li {
+    list-style-type: none; /* Remove bullet points from list items */
+}
+
+/* Remove default list padding and margins */
+.dropdown-list {
+    padding: 5px;
+    margin: 0;
+}
+.material-content {
+    margin-bottom: 20px;
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.question-group {
+    margin-bottom: 20px;
+}
+
+.question {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    margin: 150px auto 80px auto;
+    max-width: 1500px;
+    min-height: 700px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.left, .right {
+    padding: 20px;
+}
+
+.left {
+    width: 20%;
+    border-right: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.right {
+    width: 80%;
+}
+
+h5 {
+    margin-bottom: 20px;
+}
+
+.form-container {
+    display: none;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.chapter-list {
+    margin-top: 20px;
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Bootstrap danger color */
+    color: white;
+    padding: 8px 16px; /* Adjust padding for better button sizing */
+    border-radius: 4px; /* Rounded corners */
+    border: none; /* Remove default border */
+    font-size: 14px; /* Adjust font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Ensure it behaves like a button */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+    box-shadow: 0 2px 10px rgba(220, 53, 69, 0.4); /* Add a subtle shadow on hover */
+}
+
+.delete-btn:active {
+    background-color: #bd2130; /* Even darker red when clicked */
+    box-shadow: none; /* Remove shadow on active click */
+}
+
+.chapter-item {
+    margin-bottom: 15px;
+}
+
+.chapter-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.chapter-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    margin-left: 10px;
+}
+
+.chapter-content {
+    padding-left: 20px;
+    gap: 5px;
+}
+
+.dropdown-list a {
+    text-decoration: none; /* Remove the underline */
+    font-size: 14px; /* Adjust font size */
+    padding: 8px 16px; /* Adjust padding for button size */
+    display: inline-block; /* Ensure it behaves like a button */
+    width: auto; /* Ensure the button size isn't too wide */
+}
+
+.dropdown-button {
+    margin-bottom: 8px; /* Add some spacing between buttons */
+}
+
+/* Adjust button size and appearance */
+.btn-secondary.dropdown-button {
+    font-size: 14px; /* Set the font size to something smaller */
+    padding: 8px 12px; /* Reduce padding for a smaller button */
+    border-radius: 4px; /* Adjust button corners */
+}
+
+/* Optional: if you want the buttons to stretch full width */
+.dropdown-list li {
+    list-style-type: none; /* Remove bullet points from list items */
+}
+
+/* Remove default list padding and margins */
+.dropdown-list {
+    padding: 5px;
+    margin: 0;
+}
+.content-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.question-group {
+    margin-bottom: 20px;
+}
+
+.question {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.option, .answer {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+/* .container {
+    background-color: black;
+    display: flex;
+    gap: 20px;
+}
+
+.left {
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
+
+.left .btn-primary {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 18px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.left .btn-primary:hover {
+    background-color: black;
+}
+
+.bi-check-circle {
+    margin-left: 10px;
+}
+
+.bi-lock-fill {
+    margin-left: 10px;
+    color: #dc3545;
+}
+
+#chapterContent {
+    margin-top: 10px;
+}
+
+#chapterContent ul li {
+    margin: 10px 0;
+}
+
+#chapterContent .btn-secondary {
+    width: 100%;
+    background-color: #6c757d;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#chapterContent .btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.right {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.content-container {
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.content-body {
+    margin-top: 20px;
+}
+
+.question-group {
+    margin-bottom: 30px;
+    padding: 15px;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.question-group h5 {
+    font-size: 20px;
+    color: #333;
+}
+
+.question p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: black;
+} */

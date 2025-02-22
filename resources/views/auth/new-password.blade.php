@@ -67,11 +67,16 @@
                     <span class="error-message"></span>
                 </div>
 
-                <ul class="password-rules">
-                    <li id="rule-length">At least 8 characters long</li>
-                    <li id="rule-uppercase">At least one uppercase letter</li>
-                    <li id="rule-special">At least one special character (@, ., /)</li>
-                </ul>
+                <!-- Password Criteria Section -->
+                <div id="passwordCriteria">
+                    <ul class="password-rules">
+                        <li id="lengthCriteria">At least 8 characters</li>
+                        <li id="uppercaseCriteria">At least one uppercase letter</li>
+                        <li id="lowercaseCriteria">At least one lowercase letter</li>
+                        <li id="numberCriteria">At least one number</li>
+                        <li id="specialCharCriteria">At least one special character (!@#$%^&*)</li>
+                    </ul>
+                </div>
 
                 <div class="textbox">
                     <label for="password_confirmation">Confirm Password</label>
@@ -86,6 +91,7 @@
         </div>
     </div>
 
+    <!-- Updated JS Validation -->
     <script>
         $(document).ready(function() {
             $('#password').on('input', function() {
@@ -100,13 +106,17 @@
                 let password = $('#password').val();
                 let lengthRule = password.length >= 8;
                 let uppercaseRule = /[A-Z]/.test(password);
-                let specialCharRule = /[@.\/]/.test(password);
+                let lowercaseRule = /[a-z]/.test(password);
+                let numberRule = /[0-9]/.test(password);
+                let specialCharRule = /[!@#$%^&*]/.test(password);
 
-                updateRuleState('#rule-length', lengthRule);
-                updateRuleState('#rule-uppercase', uppercaseRule);
-                updateRuleState('#rule-special', specialCharRule);
+                updateRuleState('#lengthCriteria', lengthRule);
+                updateRuleState('#uppercaseCriteria', uppercaseRule);
+                updateRuleState('#lowercaseCriteria', lowercaseRule);
+                updateRuleState('#numberCriteria', numberRule);
+                updateRuleState('#specialCharCriteria', specialCharRule);
 
-                if (lengthRule && uppercaseRule && specialCharRule) {
+                if (lengthRule && uppercaseRule && lowercaseRule && numberRule && specialCharRule) {
                     clearError($('#password'));
                 } else {
                     showError($('#password'), 'Password does not meet all requirements.');
@@ -128,8 +138,10 @@
                 let element = $(selector);
                 if (isValid) {
                     element.addClass('valid');
+                    element.removeClass('invalid');
                 } else {
                     element.removeClass('valid');
+                    element.addClass('invalid');
                 }
             }
 

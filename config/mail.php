@@ -93,7 +93,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'chanty-wp21@student.tarc.edu.my'),
-        'name' => env('MAIL_FROM_NAME', 'lms'),
+        'name' => env('MAIL_FROM_NAME', 'superkianho'),
     ],
 
     /*
